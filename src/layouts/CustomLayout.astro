@@ -1,0 +1,19 @@
+---
+import type { MDXLayoutProps } from 'astro';
+import { TinaMarkdown } from 'tinacms/dist/rich-text'
+
+type Props = MDXLayoutProps<{
+    title: string;
+	body: string;
+}>;
+
+const {	frontmatter } = Astro.props;
+---
+
+<html lang="en">
+    <head></head>
+    <body>
+        <h1>{frontmatter.title}</h1>
+        <p>{frontmatter.body}</p>
+    </body>
+</html>

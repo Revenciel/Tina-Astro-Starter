@@ -1,0 +1,21 @@
+---
+import CustomLayout from '../layouts/CustomLayout.astro';
+// import Counter from '../components/Counter.astro';
+
+export async function getStaticPaths() {
+
+    /* This would need to be updated if there are more types of page collections than just "pages" */
+  const pages = await Astro.glob('../content/pages/*.{md,mdx}') 
+
+  return pages.map((page) => ({
+		params: {
+			slug: page.file.split('/').pop().replace(/\.md(x)?/,'')
+		},
+		props: { page },
+	}));
+}
+
+const { frontmatter, Content } = Astro.props.page
+
+---
+<CustomLayout {frontmatter} />
