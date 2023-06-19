@@ -14,7 +14,7 @@ export default defineConfig({
   },
   media: {
     tina: {
-      mediaRoot: "",
+      mediaRoot: "uploads",
       publicFolder: "public",
     },
   },
@@ -23,15 +23,16 @@ export default defineConfig({
       {
         name: "page",
         label: "Pages",
-        path: "src/content/pages",
-        ui: {
-          router: ({ document }) => {
-            if (document._sys.filename === "home") {
-              return `/`;
-            }
-            return "/" + document._sys.filename;
-          },
-        },
+        path: "src/content/pages/",
+        format:'mdx',
+        // ui: {
+        //   router: ({ document }) => {
+        //     if (document._sys.filename === "index") {
+        //       return `/`;
+        //     }
+        //     return "/" + document._sys.filename;
+        //   },
+        // },
         fields: [
           {
             type: "string",
