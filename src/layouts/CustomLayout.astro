@@ -1,10 +1,20 @@
----
-// import type { MDXLayoutProps } from 'astro';
 
-// type Props = MDXLayoutProps<{
-//     title: string;
-// 	body: string;
-// }>;
+---
+import Layout from './Custom';
+
+const { frontmatter } = Astro.props;
+---
+<Layout client:load title={frontmatter.title}><slot /></Layout>
+
+
+
+<!-- ---
+import type { MDXLayoutProps } from 'astro';
+
+type Props = MDXLayoutProps<{
+    title: string;
+	body: string;
+}>;
 
 const {	frontmatter } = Astro.props;
 ---
@@ -15,4 +25,4 @@ const {	frontmatter } = Astro.props;
         <h1>{frontmatter.title}</h1>
         <slot />
     </body>
-</html>
+</html> -->
