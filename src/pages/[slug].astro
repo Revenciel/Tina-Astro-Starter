@@ -1,6 +1,8 @@
 ---
 import CustomLayout from '../layouts/CustomLayout.astro';
-import { useTina } from 'tinacms/dist/react';
+
+import { client } from '../../tina/__generated__/client'
+
 
 export async function getStaticPaths() {
 
@@ -18,6 +20,4 @@ export async function getStaticPaths() {
 const { frontmatter, Content } = Astro.props.page
 
 ---
-<CustomLayout {frontmatter}><Content /></CustomLayout>
-<!-- This successfully renders the body: 
-	<Content /> -->
+<CustomLayout client:load {frontmatter}><Content /></CustomLayout>

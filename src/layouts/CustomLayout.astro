@@ -4,7 +4,7 @@ import Layout from './Custom';
 
 const { frontmatter } = Astro.props;
 ---
-<Layout client:load title={frontmatter.title}><slot /></Layout>
+<Layout title={frontmatter.title}><slot /></Layout>
 
 
 
