@@ -24,7 +24,7 @@ export default defineConfig({
         name: "siteConfig",
         label: "Site Settings",
         path: "src/content/site-settings",
-        format:'mdx',
+        format:'json',
         ui: {
           allowedActions: {
             create: false,
@@ -48,14 +48,19 @@ export default defineConfig({
         label: "Pages",
         path: "src/content/pages/",
         format:'mdx',
-        // ui: {
+        ui: {
+          filename: {
+            slugify: values => {
+              return `${values?.title?.toLowerCase().replace(/[^a-zA-Z\d_\-\s]/g, '').replace(/\s/g, '-',)}`
+            },
+          }
         //   router: ({ document }) => {
         //     if (document._sys.filename === "index") {
         //       return `/`;
         //     }
         //     return "/" + document._sys.filename;
         //   },
-        // },
+        },
         fields: [
           {
             type: "string",

@@ -2,9 +2,7 @@
 import { useTina } from 'tinacms/dist/react';
 import { client } from '../../tina/__generated__/client';
 import type { ReactNode } from "react";
-
-// APPROACH TWO:
-
+import siteData from '../content/site-settings/index.json'
 
 // APPROACH ONE:
 // - Specifies props and types correctly in TypeScript
@@ -20,7 +18,7 @@ export default function Layout({pageTitle, children}: Props) {
     return (
         <html lang="en">
             <head>
-                <title>{pageTitle} | sitetitleplaceholder</title>
+                <title>{pageTitle} | {siteData.siteTitle}</title>
             </head>
             <body>
                 <h1>{pageTitle}</h1>
