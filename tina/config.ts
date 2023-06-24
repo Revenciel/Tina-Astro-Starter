@@ -66,7 +66,7 @@ export default defineConfig({
             required: true,
           },
           {
-            type: 'rich-text',
+            type: 'string',
             name: 'body',
             label: 'Body text',
             isBody: true,

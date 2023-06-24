@@ -12,12 +12,12 @@
   "dependencies": {
     "@astrojs/mdx": "^0.19.7",
     "@astrojs/react": "^2.2.1",
-    "@tinacms/cli": "^1.5.19",
+    "@tinacms/cli": "0.0.0-20230623000122",
     "@types/react": "^18.2.13",
     "@types/react-dom": "^18.2.6",
     "astro": "^2.6.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tinacms": "^1.5.10"
+    "tinacms": "0.0.0-20230623000122"
   }
 }
