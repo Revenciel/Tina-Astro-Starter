@@ -1,40 +1,78 @@
 
-//import { useTina } from 'tinacms/dist/react';
-
-// ISSUE:
-// When I uncomment the useTina import, I get an error:
-// "Cannot use import statement outside a module"
-// "[vite] Error when evaluating SSR module /src/layouts/Custom.tsx: failed to import "tinacms/dist/react"
-
-// Otherwise, this code works as I expect.
-// However, I need to import useTina to set up visual editing.
-
+import { useTina } from 'tinacms/dist/react';
 import type { ReactNode } from "react";
 
-interface props {
-    title: string;
+// SOLUTION ONE:
+// - Specifies props and types correctly in TypeScript
+// - But does not successfully use the useTina hook
+// - I couldn't figure out how to pass the props through the hook
+interface Props {
+    pageTitle: string;
     children: ReactNode;
 }
 
-// QUESTION:
-// what is a "ReactNode"? I put that as the type because of a VS code error that I didn't understand
-
-export default function Layout({title, children}: props) {
-//export default function Layout(props: any) {
-
-    // const { data } = useTina({
-    //     query: props.query,
-    //     variables: props.variables,
-    //     data: props.data,
-    //   })
+export default function Layout({pageTitle, children}: Props) {
 
     return (
         <html lang="en">
-            <head></head>
+            <head>
+                <title>{pageTitle} + "|" sitetitleplaceholder</title>
+            </head>
             <body>
-                <h1>{title}</h1>
+                <h1>{pageTitle}</h1>
                 <main>{children}</main>
             </body>
         </html>
     );
 };
+
+// SOLUTION THREE:
+// - 
+// - 
+// - 
+// interface Props {
+//     pageTitle: string;
+//     children: ReactNode;
+// }
+
+// export const Layout = (props: Props) => {
+//     const { data } = useTina(props);
+
+//     return (
+//         <html lang="en">
+//             <head>
+//                 <title>{data.title} + "|" sitetitleplaceholder</title>
+//             </head>
+//             <body>
+//                 <h1>{data.title}</h1>
+//                 <main>{data.children}</main>
+//             </body>
+//         </html>
+//     );
+// };
+
+// SOLUTION ????
+// interface Props {
+//     pageTitle: string;
+//     children: ReactNode;
+// }
+
+// export default function Layout({props}: Props) {
+//     const { data } = useTina({
+//         query: props.query,
+//         variables: props.variables,
+//         data: props.data,
+//       })
+
+//     return (
+//         <html lang="en">
+//             <head>
+//                 <title>{data.pageTitle} + "|" sitetitleplaceholder</title>
+//             </head>
+//             <body>
+//                 <h1>{data.pageTitle}</h1>
+//                 <main>{data.children}</main>
+//             </body>
+//         </html>
+//     );
+// };

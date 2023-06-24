@@ -17,6 +17,22 @@ export async function getStaticPaths() {
 	}));
 }
 
+////////
+
+// export const getStaticProps = async () => {
+//   const pageResponse = await client.queries.page({ relativePath: '*.mdx' })
+
+//   return {
+//     props: {
+//       data: pageResponse.data,
+//       query: pageResponse.query,
+//       variables: pageResponse.variables,
+//     },
+//   }
+// }
+
+///////
+
 const { frontmatter, Content } = Astro.props.page
 
 ---

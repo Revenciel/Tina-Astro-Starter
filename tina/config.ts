@@ -21,6 +21,29 @@ export default defineConfig({
   schema: {
     collections: [
       {
+        name: "siteConfig",
+        label: "Site Settings",
+        path: "src/content/site-settings",
+        format:'mdx',
+        ui: {
+          allowedActions: {
+            create: false,
+            delete: false,
+          },
+          filename: {
+            readonly: true,
+          },
+          global: true,
+        },
+        fields: [
+          {
+            type: "string",
+            name: "siteTitle",
+            label: "Website title",
+          },
+        ],
+      },
+      {
         name: "page",
         label: "Pages",
         path: "src/content/pages/",
