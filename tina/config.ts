@@ -53,13 +53,13 @@ export default defineConfig({
             slugify: values => {
               return `${values?.title?.toLowerCase().replace(/[^a-zA-Z\d_\-\s]/g, '').replace(/\s/g, '-',)}`
             },
-          }
-        //   router: ({ document }) => {
-        //     if (document._sys.filename === "index") {
-        //       return `/`;
-        //     }
-        //     return "/" + document._sys.filename;
-        //   },
+          },
+          router: ({ document }) => {
+            // if (document._sys.filename === "index") {
+            //   return `/`;
+            // }
+            return "/" + document._sys.filename;
+          },
         },
         fields: [
           {
