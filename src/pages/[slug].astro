@@ -1,21 +1,32 @@
 ---
-import Layout from '../layouts/Custom';
-// import { useTina } from 'tinacms/dist/react';
-// import { client } from '../../tina/__generated__/client'
+import Layout from "../layouts/Custom";
+import { client } from "../../tina/__generated__/client";
 
 export async function getStaticPaths() {
-  const pages = await Astro.glob('../content/pages/*.{md,mdx}') 
+  // get all the pages that exist, using Tina client
+  const allPages = await client.queries.pageConnection();
 
-  return pages.map((page) => ({
-		params: {
-			slug: page.file.split('/').pop().replace(/\.md(x)?/,'')
-		},
-		props: { page },
+  // map the data into the required structure for Tina to fetch individual pages
+  const tinaPaths = allPages.data.pageConnection.edges!.map((page) => ({
+    params: { relativePath: page!.node!._sys.relativePath },
+  }));
 
-	}));
+  // fetch all pages and content from Tina, to pass into useTina hook
+  const tinaPages = await Promise.all(tinaPaths.map(async ({ params }) => await client.queries.page({ relativePath: `${params.relativePath}` })));
+
+  // reformat data for easier use
+  return tinaPages.map((page) => ({
+    params: {
+      slug: page.data.page._sys.relativePath,
+    },
+    props: {
+      data: page.data,
+      query: page.query,
+      variables: page.variables,
+    },
+  }));
 }
-
-const { frontmatter, Content } = Astro.props.page;
-
 ---
-<Layout client:load pageTitle={frontmatter.title}><Content /></Layout>
+
+<!-- TODO: Investigate and fix type error here -->
+<Layout client:load props={Astro.props} />
