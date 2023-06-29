@@ -5,9 +5,10 @@
   "scripts": {
     "dev": "tinacms dev -c 'astro dev'",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "tinacms build -c 'astro build'",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "astrobuild":"astro build"
   },
   "dependencies": {
     "@astrojs/mdx": "^0.19.7",

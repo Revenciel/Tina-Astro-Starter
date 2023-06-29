@@ -6,9 +6,9 @@ import { textBandSchema } from "../src/components/bands/text";
 // const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main";
 
 export default defineConfig({
-  branch:"main",
-  clientId: null, // Get this from tina.io
-  token: null, // Get this from tina.io
+  branch:"master",
+  clientId: "494cca97-cb62-41a9-ab80-f79d981e8a6f", // Get this from tina.io
+  token: "ce2d587cce14f26a83c2bdb54603d1928006284c", // Get this from tina.io
 
   build: {
     outputFolder: "admin",

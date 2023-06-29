@@ -8,16 +8,16 @@ export const Bands = (props: Page) => {
         <>
         {props.bands
         ? props.bands.map(function (band, i) {
-            switch (band.__typename) {
+            switch (band!.__typename) {
               case 'PageBandsTextBand':
                 return (
-                  <React.Fragment key={i + band.__typename}>
+                  <React.Fragment key={i + band!.__typename}>
                     <Text data={band} />
                   </React.Fragment>
                 )
               case 'PageBandsPhotoBand':
                 return (
-                  <React.Fragment key={i + band.__typename}>
+                  <React.Fragment key={i + band!.__typename}>
                     <Photo data={band} />
                   </React.Fragment>
                 )
