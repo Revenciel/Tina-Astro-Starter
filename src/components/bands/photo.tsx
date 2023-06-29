@@ -1,4 +1,5 @@
 import type { Template } from "tinacms";
+import { tinaField } from "tinacms/dist/react";
 
 export default function Photo({ data }: {
     data: {
@@ -8,7 +9,7 @@ export default function Photo({ data }: {
 
     return (
         <section>
-           <img src={data.photo}/>
+           <img data-tina-field={tinaField(data, 'photo')} src={data.photo}/>
         </section>
     );
 };

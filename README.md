@@ -4,11 +4,11 @@
 ### Implemented:
 - Visual editing
 - Block-based editing
+- Implement click-to-edit
+- Implement search
 
 ### To do:
 - make it so index cannot be deleted in the Tina editor
-- Implement search
-- Implement click-to-edit (maybe)
 - implement blog
 - build starter components
 - build starter MDX components (buttons)

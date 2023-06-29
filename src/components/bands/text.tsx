@@ -1,3 +1,4 @@
+import { tinaField } from "tinacms/dist/react";
 import type { Template } from "tinacms";
 
 
@@ -10,8 +11,8 @@ export default function Text({ data }: {
 
     return (
         <section>
-            <h2>{data.title}</h2>
-            <p>{data.content}</p>
+            <h2 data-tina-field={tinaField(data, 'title')}>{data.title}</h2>
+            <p data-tina-field={tinaField(data, 'content')}>{data.content}</p>
         </section>
     );
 };

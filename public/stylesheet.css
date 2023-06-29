@@ -1,0 +1,10 @@
+
+
+/* Tina click-to-edit styles (visible in admin only) */
+.__tina-quick-editing-enabled [data-tina-field] {
+    outline: 1px dotted lightgrey;
+  }
+  .__tina-quick-editing-enabled [data-tina-field]:hover {
+    outline: 2px dotted pink;
+    box-shadow:none;
+  }
