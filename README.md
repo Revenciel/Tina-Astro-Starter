@@ -8,9 +8,11 @@
 ### To do:
 - resolve errors on build
 - make it so index cannot be deleted in the Tina editor
+- Implement search
+- Implement click-to-edit (maybe)
+- implement blog
 - build starter components
 - build starter MDX components (buttons)
-- implement blog
 
 ### Thank you:
 - Ari Gibson, without whom this project would have been over before it got started
