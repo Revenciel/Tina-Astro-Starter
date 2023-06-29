@@ -57,9 +57,6 @@ export default defineConfig({
             },
           },
           router: ({ document }) => {
-            // if (document._sys.filename === "index") {
-            //   return `/`;
-            // }
             return "/" + document._sys.filename;
           },
         },

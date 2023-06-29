@@ -1,0 +1,8 @@
+---
+import Layout from "../layouts/CustomLayout";
+import { client } from "../../tina/__generated__/client";
+
+const page = await client.queries.page({ relativePath: "index.mdx" });
+---
+
+<Layout client:load props={page} />
