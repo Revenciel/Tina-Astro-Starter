@@ -11,6 +11,7 @@
 - make it so index cannot be deleted in the Tina editor
 - implement blog
 - build starter components
+- - Including: component that lists all pages
 - build starter MDX components (buttons)
 
 ### Thank you:

@@ -4,6 +4,7 @@ import type { Page } from '../../tina/__generated__/types'
 // Import all bands:
 import Text from './bands/text';
 import Photo from './bands/photo';
+import List from './bands/pageList';
 
 export const Bands = (props: Page) => {
     return(
@@ -24,6 +25,13 @@ export const Bands = (props: Page) => {
                 return (
                   <React.Fragment key={i + band!.__typename}>
                     <Photo data={band} />
+                  </React.Fragment>
+                )
+
+              case 'PageBandsListBand':
+                return (
+                  <React.Fragment key={i + band!.__typename}>
+                    <List data={band} />
                   </React.Fragment>
                 )
 

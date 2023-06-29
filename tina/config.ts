@@ -1,14 +1,15 @@
 import { defineConfig } from "tinacms";
 import { photoBandSchema } from "../src/components/bands/photo";
 import { textBandSchema } from "../src/components/bands/text";
+import { listBandSchema } from "../src/components/bands/pageList";
 
 // Your hosting provider likely exposes this as an environment variable
 // const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main";
 
 export default defineConfig({
   branch:"master",
-  clientId: "494cca97-cb62-41a9-ab80-f79d981e8a6f", // Get this from tina.io
-  token: "ce2d587cce14f26a83c2bdb54603d1928006284c", // Get this from tina.io
+  clientId: process.env.PUBLIC_TINA_CLIENT_ID!,
+  token: process.env.TINA_TOKEN!, // Get this from tina.io
 
   build: {
     outputFolder: "admin",
@@ -81,13 +82,14 @@ export default defineConfig({
               // add templates here
               photoBandSchema,
               textBandSchema,
+              listBandSchema,
             ],
           },
         ],
       },
       {
         name: "post",
-        label: "Posts",
+        label: "Blog Posts",
         path: "content/posts",
         fields: [
           {
@@ -98,10 +100,35 @@ export default defineConfig({
             required: true,
           },
           {
+            type: "string",
+            name: "description",
+            label: "Description",
+          },
+          {
+            type: "datetime",
+            name: "pubDate",
+            label: "Publish Date",
+            description: "The date this post was originally created.",
+            required: true,
+            ui: {
+              dateFormat: "DD MMMM YYYY"
+            },
+          },
+          {
             type: "rich-text",
             name: "body",
             label: "Body",
+            required: true,
             isBody: true,
+          },
+          {
+            type: "datetime",
+            name: "editDate",
+            label: "Edit Date",
+            description:"The date this post was updated (if edited after the publish date).",
+            ui: {
+              dateFormat: "DD MMMM YYYY"
+            },
           },
         ],
       },
