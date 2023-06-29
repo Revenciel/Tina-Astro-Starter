@@ -1,4 +1,6 @@
 import { defineConfig } from "tinacms";
+import { photoBandSchema } from "../src/components/bands/photo";
+import { textBandSchema } from "../src/components/bands/text";
 
 // Your hosting provider likely exposes this as an environment variable
 // const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main";
@@ -71,21 +73,23 @@ export default defineConfig({
             required: true,
           },
           {
-            type: 'string',
-            name: 'body',
-            label: 'Body text',
-            isBody: true,
+            // type: 'string',
+            // name: 'body',
+            // label: 'Body text',
+            // isBody: true,
 
-            // type: "object",
-            // list: true,
-            // name: "blocks",
-            // label: "Sections",
-            // ui: {
-            //   visualSelector: true,
-            // },
-            // templates: [
-            //   // add templates here
-            // ],
+            type: "object",
+            list: true,
+            name: "bands",
+            label: "Page Sections",
+            ui: {
+              visualSelector: true,
+            },
+            templates: [
+              // add templates here
+              photoBandSchema,
+              textBandSchema,
+            ],
           },
         ],
       },

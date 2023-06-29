@@ -1,6 +1,7 @@
 ---
-import Layout from "../layouts/Custom";
+import Layout from "../layouts/CustomLayout";
 import { client } from "../../tina/__generated__/client";
+// import { Bands } from "../components/bands";
 
 export async function getStaticPaths() {
   // get all the pages that exist, using Tina client
@@ -16,8 +17,8 @@ export async function getStaticPaths() {
 
   // reformat data for easier use
   return tinaPages.map((page) => ({
+
     params: {
-      //slug: page.data.page._sys.relativePath,
       slug: page.data.page._sys.filename,
     },
     props: {
@@ -26,23 +27,12 @@ export async function getStaticPaths() {
       variables: page.variables,
     },
   }));
+
 }
+
 ---
 
 <!-- TODO: Investigate and fix type error here -->
-<Layout client:load props={Astro.props} />
-
-<!-- 
-export async function getStaticPaths() {
-  const pages = await Astro.glob('../content/pages/*.{md,mdx}') 
-
-  return pages.map((page) => ({
-		params: {
-			slug: page.file.split('/').pop().replace(/\.md(x)?/,'')
-		},
-		props: { page },
-
-	}));
-}
-
-const { frontmatter, Content } = Astro.props.page; -->
+<Layout client:load props={Astro.props}>
+  <!-- <Bands {...Astro.props.page}/> -->
+</Layout>
