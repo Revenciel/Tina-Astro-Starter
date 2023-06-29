@@ -70,11 +70,6 @@ export default defineConfig({
             required: true,
           },
           {
-            // type: 'string',
-            // name: 'body',
-            // label: 'Body text',
-            // isBody: true,
-
             type: "object",
             list: true,
             name: "bands",

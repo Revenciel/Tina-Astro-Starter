@@ -6,7 +6,6 @@
 - Block-based editing
 
 ### To do:
-- resolve errors on build
 - make it so index cannot be deleted in the Tina editor
 - Implement search
 - Implement click-to-edit (maybe)
