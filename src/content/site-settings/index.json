@@ -1,3 +1,20 @@
 {
-  "siteTitle": "Ciel's Sandbox"
+  "siteTitle": "Ciel's Sandbox",
+  "logo": "/uploads/comet icon.png",
+  "title": "Website Title",
+  "tagline": "Website tagline",
+  "navLinks": [
+    {
+      "path": "src/content/pages/about.mdx",
+      "anchor": "About"
+    },
+    {
+      "path": "src/content/pages/program.mdx",
+      "anchor": "Program"
+    },
+    {
+      "path": "src/content/pages/index.mdx",
+      "anchor": "Home"
+    }
+  ]
 }

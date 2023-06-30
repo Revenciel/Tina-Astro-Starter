@@ -13,6 +13,7 @@
 - build starter components
 - - Including: component that lists all pages
 - build starter MDX components (buttons)
+- Make ability to set favicon in site settings
 
 ### Thank you:
 - Ari Gibson, without whom this project would have been over before it got started

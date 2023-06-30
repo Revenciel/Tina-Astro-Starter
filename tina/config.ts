@@ -41,8 +41,88 @@ export default defineConfig({
         fields: [
           {
             type: "string",
-            name: "siteTitle",
-            label: "Website title",
+            name: "title",
+            label: "Website Title",
+          },
+          {
+            type: "image",
+            name: "logo",
+            label: "Logo",
+          },
+          {
+            type:"image",
+            name:"favicon",
+            label:"Favicon",
+            description:"The favicon is the small icon that appears on the browser tab. It is usually the logo, or a simplified version of the logo.",
+          },
+          {
+            type:"string",
+            name:"tagline",
+            label:"Tagline or Motto",
+          },
+          {
+            type:"object",
+            label:"Menu Links",
+            name:"navLinks",
+            description:"If you delete a page that is linked in this menu, you must also delete or update the menu link here!",
+            list:true,
+            ui: {
+              itemProps: (item) => {
+                return {label: item?.anchor};
+              },
+            },
+            
+            // templates:[
+            //   {
+            //     name:"internal",
+            //     label:"Internal link",
+            //     fields: [
+            //       {
+            //         type:"reference",
+            //         name:"path",
+            //         label:"Page",
+            //         collections:['page'],
+            //       }
+            //     ],
+            //   },
+            //   {
+            //     name:"external",
+            //     label:"External Link",
+            //     fields:[
+            //       {
+            //         name:"url",
+            //         label:"URL",
+            //         type:"string",
+            //       },
+            //       {
+            //         name:"anchor",
+            //         label:"Link display text",
+            //         type:"string",
+            //       },
+            //     ],
+            //   },
+            // ],
+
+            fields:[
+              {
+                type:"reference",
+                name:"path",
+                label:"Page to link to",
+                collections:['page'],
+              },
+              {
+                type:"string",
+                name:"url",
+                label:"URL",
+                description:"If you are linking to an external website, leave the previous field blank and put the URL here.",
+              },
+              {
+                type:"string",
+                name:"anchor",
+                label:"Link text",
+                required:true,
+              },
+            ],
           },
         ],
       },

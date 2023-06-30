@@ -1,6 +1,80 @@
+:root {
+  --primary: #ffcc17;
+  --dark: #001d43;
+  --light: #f4f4f4;
+
+  --spacer:20px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body{
+  margin:0;
+}
+
+.grid {
+  /* for use on full-width bands */
+  --wrap: 1200px; /* maximum webpage width */
+  --columns_margin: max(20px, calc(calc(100vw - var(--wrap)) / 2));
+  display: grid;
+  grid-template-columns:
+    var(--columns_margin)
+    repeat(12, 1fr)
+    var(--columns_margin);
+  column-gap: var(--spacer);
+}
+
+/* ********** HEADER ********** */
+header {
+  background-color:aliceblue;
+  height: 100px;
+  padding:var(--spacer);
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+}
+header #branding{
+  height:100%;
+  color: var(--dark);
+  display:flex;
+}
+
+#branding .copy{
+  order:1;
+}
+
+#tagline{
+  margin:0;/*dealing with defaults*/
+}
+
+h1{
+  margin:0; /*dealing with defaults*/
+}
+
+#logo {
+  height: 100%;
+  float:left;
+  order:0;
+  margin-right:var(--spacer);
+}
+
+nav li{
+  list-style:none;
+  display:inline;
+  padding-left:var(--spacer);
+}
+
+nav li:first-of-type{
+  padding-left:0;
+}
 
 
-/* Tina click-to-edit styles (visible in admin only) */
+/* ********** CLICK-TO-EDIT ********** */
+/* Tina Admin Only */
 .__tina-quick-editing-enabled [data-tina-field] {
     outline: 1px dotted lightgrey;
   }

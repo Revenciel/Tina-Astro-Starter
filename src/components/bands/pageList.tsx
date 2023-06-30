@@ -4,6 +4,32 @@ import React from "react";
 import client from "../../../tina/__generated__/client";
 import type { PageConnectionEdges } from "../../../tina/__generated__/types";
 
+
+// const allPages = await client.queries.pageConnection();
+
+// // map the data into the required structure for Tina to fetch individual pages
+// const tinaPaths = allPages.data.pageConnection.edges!.map((page) => ({
+//     params: { relativePath: page!.node!._sys.relativePath },
+// }));
+
+// // fetch all pages and content from Tina, to pass into useTina hook
+// const tinaPages = await Promise.all(tinaPaths.map(async ({ params }) => await client.queries.page({ relativePath: `${params.relativePath}` })));
+
+// // Attempt to make list of pages show:
+// export default function List({ data }: {data: {text: string}}) {
+
+//     return (
+//         <ul>
+//            {tinaPages.map((page: any) => {
+//             return (
+//                 <li><a href={page._sys.filename}>{page.title}</a></li>
+//             )
+//            })}
+//         </ul>
+//     );
+// };
+
+
 // Attempt to make list of pages show:
 // export default function List({ data }: any) {
 
