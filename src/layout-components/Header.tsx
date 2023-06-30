@@ -24,9 +24,7 @@ export default function Header({ props }: { props: TinaProps }) {
                 var target = "_blank";
                 if (link.path != null){
                     target = "";
-                    destination = link.path;
-                    //format path correctly
-                    destination = destination.replace("src/content/pages/","").replace(".mdx","");
+                    destination = link.path.replace("src/content/pages/","").replace(".mdx","");
                     if (destination === "index"){
                         destination = "/";
                     }
