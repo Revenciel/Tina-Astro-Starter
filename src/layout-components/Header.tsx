@@ -8,30 +8,27 @@ export default function Header({ props }: { props: TinaProps }) {
   
     return (
         <header>
-        <div id="branding">
+        <a id="branding" href="/">
           <div className="copy">
             <h1>{siteData.title}</h1>
             <p id="tagline">{siteData.tagline}</p>
           </div>
           <img src={siteData.logo} id="logo" alt={`${siteData.title} logo`}/>
-        </div>
+        </a>
         <nav>
           <ul>
-            {siteData.navLinks.map((link: any) => {
+            {siteData.navLinks.map((link) => {
 
-                // determine whether link destination is internal or external
-                var destination = link.url;
-                var target = "_blank";
-                if (link.path != null){
-                    target = "";
-                    destination = link.path.replace("src/content/pages/","").replace(".mdx","");
-                    if (destination === "index"){
-                        destination = "/";
-                    }
+                var destination = link.relativePath;
+                var target = "";
+                if (link.linkType === "external"){
+                    target = "_blank";
+                    destination = link.url;
+                    anchor = link.anchor;
                 }
                 // return appropriate link data
                 return (
-                    <li><a href={destination} target={target}>{link.anchor}</a></li>
+                    <li><a href={destination} target={target}>{anchor}</a></li>
                   )
             })}
           </ul>
@@ -40,3 +37,7 @@ export default function Header({ props }: { props: TinaProps }) {
     );
   }
 
+  // var pageName = item?.path
+  //                   .substring(0,item?.path.lastIndexOf("."))
+  //                   .split("/");
+  //                 pageName = pageName[pageName.length - 1];

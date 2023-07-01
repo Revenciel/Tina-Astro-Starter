@@ -5,16 +5,13 @@
   "tagline": "Website tagline",
   "navLinks": [
     {
-      "path": "src/content/pages/about.mdx",
-      "anchor": "About"
+      "linkType": "internal",
+      "relativePath": "src/content/pages/about.mdx"
     },
     {
-      "path": "src/content/pages/program.mdx",
-      "anchor": "Program"
-    },
-    {
-      "path": "src/content/pages/index.mdx",
-      "anchor": "Home"
+      "linkType": "external",
+      "url": "https://www.youtube.com/watch?v=yP-29XsOm7k",
+      "anchor": "External"
     }
   ]
 }

@@ -7,6 +7,7 @@
 - Click-to-edit
 - Search documents in edit mode
 - Configurable nav links
+- nav link bug fix
 
 ### To do:
 - make it so index cannot be deleted in the Tina editor

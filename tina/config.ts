@@ -1,13 +1,15 @@
+import React from "react";
 import { defineConfig } from "tinacms";
 import { photoBandSchema } from "../src/components/bands/photo";
 import { textBandSchema } from "../src/components/bands/text";
 import { listBandSchema } from "../src/components/bands/pageList";
+import { ReferenceField, TextField } from "tinacms";
 
 // Your hosting provider likely exposes this as an environment variable
 // const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main";
 
 export default defineConfig({
-  branch:"master",
+  branch: "master",
   clientId: process.env.PUBLIC_TINA_CLIENT_ID!,
   token: process.env.TINA_TOKEN!, // Get this from tina.io
 
@@ -27,7 +29,7 @@ export default defineConfig({
         name: "siteConfig",
         label: "Site Settings",
         path: "src/content/site-settings",
-        format:'json',
+        format: 'json',
         ui: {
           allowedActions: {
             create: false,
@@ -50,77 +52,130 @@ export default defineConfig({
             label: "Logo",
           },
           {
-            type:"image",
-            name:"favicon",
-            label:"Favicon",
-            description:"The favicon is the small icon that appears on the browser tab. It is usually the logo, or a simplified version of the logo.",
+            type: "image",
+            name: "favicon",
+            label: "Favicon",
+            description: "The favicon is the small icon that appears on the browser tab. It is usually the logo, or a simplified version of the logo.",
           },
           {
-            type:"string",
-            name:"tagline",
-            label:"Tagline or Motto",
+            type: "string",
+            name: "tagline",
+            label: "Tagline or Motto",
           },
           {
-            type:"object",
-            label:"Menu Links",
-            name:"navLinks",
-            description:"If you delete a page that is linked in this menu, you must also delete or update the menu link here!",
-            list:true,
+            type: "object",
+            label: "Menu Links",
+            name: "navLinks",
+            description: "If you delete a page that is linked in this menu, you must also delete or update the menu link here!",
+            list: true,
             ui: {
               itemProps: (item) => {
-                return {label: item?.anchor};
+                if (item.linkType === "internal"){
+                  if (item?.relativePath != null){
+                    var pageName = item?.relativePath
+                    .substring(0,item?.relativePath.lastIndexOf("."))
+                  .split("/");
+                  pageName = pageName[pageName.length - 1];
+                  return {label: pageName};
+                  }
+                  return{label: "Menu Link"}
+                }
+                if (item?.anchor == null){
+                  return{label: "Menu Link"}
+                }
+                return { label: item?.anchor };
+              },
+              defaultItem: {
+                linkType: "internal",
               },
             },
-            
-            // templates:[
-            //   {
-            //     name:"internal",
-            //     label:"Internal link",
-            //     fields: [
-            //       {
-            //         type:"reference",
-            //         name:"path",
-            //         label:"Page",
-            //         collections:['page'],
-            //       }
-            //     ],
-            //   },
-            //   {
-            //     name:"external",
-            //     label:"External Link",
-            //     fields:[
-            //       {
-            //         name:"url",
-            //         label:"URL",
-            //         type:"string",
-            //       },
-            //       {
-            //         name:"anchor",
-            //         label:"Link display text",
-            //         type:"string",
-            //       },
-            //     ],
-            //   },
-            // ],
 
-            fields:[
+            fields: [
               {
-                type:"reference",
-                name:"path",
-                label:"Page to link to",
-                collections:['page'],
+                type: "string",
+                name: "linkType",
+                label: "Destination",
+                description: "Is this link internal (goes to a page on your website) or external (goes to a different website)?",
+                options: [
+                  {
+                    label: "Internal",
+                    value: "internal"
+                  },
+                  {
+                    label: "External",
+                    value: "external",
+                  },
+                ],
+                ui: {
+                  component: "button-toggle",
+                },
               },
               {
-                type:"string",
-                name:"url",
-                label:"URL",
-                description:"If you are linking to an external website, leave the previous field blank and put the URL here.",
+                type: "reference",
+                name: "relativePath",
+                label: "Page to link to",
+                collections: ['page'],
+                ui: {
+                  component: (props) => {
+                    const typeOfLink = React.useMemo(() => {
+                      let fieldName = props.field.name;
+                      fieldName =
+                        fieldName.substring(0, fieldName.lastIndexOf(".")) || fieldName;
+                      return fieldName
+                        .split(".")
+                        .reduce((o, i) => o[i], props.tinaForm.values).linkType;
+                    }, [props.tinaForm.values]);
+
+                    if (typeOfLink !== "internal") {
+                      return null;
+                    }
+                    return ReferenceField(props);
+                  },
+                },
               },
               {
-                type:"string",
-                name:"anchor",
-                label:"Link text",
-                required:true,
+                type: "string",
+                name: "url",
+                label: "URL",
+                ui: {
+                  component: (props) => {
+                    const typeOfLink = React.useMemo(() => {
+                      let fieldName = props.field.name;
+                      fieldName =
+                        fieldName.substring(0, fieldName.lastIndexOf(".")) || fieldName;
+                      return fieldName
+                        .split(".")
+                        .reduce((o, i) => o[i], props.tinaForm.values).linkType;
+                    }, [props.tinaForm.values]);
+
+                    if (typeOfLink !== "external") {
+                      return null;
+                    }
+                    return TextField(props);
+                  },
+                },
+              },
+              {
+                type: "string",
+                name: "anchor",
+                label: "Link text",
+                ui: {
+                  component: (props) => {
+                    const typeOfLink = React.useMemo(() => {
+                      let fieldName = props.field.name;
+                      fieldName =
+                        fieldName.substring(0, fieldName.lastIndexOf(".")) || fieldName;
+                      return fieldName
+                        .split(".")
+                        .reduce((o, i) => o[i], props.tinaForm.values).linkType;
+                    }, [props.tinaForm.values]);
+
+                    if (typeOfLink !== "external") {
+                      return null;
+                    }
+                    return TextField(props);
+                  },
+                },
               },
             ],
           },
@@ -130,7 +185,7 @@ export default defineConfig({
         name: "page",
         label: "Pages",
         path: "src/content/pages/",
-        format:'mdx',
+        format: 'mdx',
         ui: {
           filename: {
             slugify: values => {
@@ -205,7 +260,7 @@ export default defineConfig({
             type: "datetime",
             name: "editDate",
             label: "Edit Date",
-            description:"The date this post was updated (if edited after the publish date).",
+            description: "The date this post was updated (if edited after the publish date).",
             ui: {
               dateFormat: "DD MMMM YYYY"
             },
