@@ -8,7 +8,6 @@ export default function Layout({ props }: { props: TinaProps }) {
 
   return (
     <main>
-        <h2 data-tina-field={tinaField(data.page, 'title')}>{data.page.title}</h2>
         <Bands {...data.page}></Bands>
       </main>
   );

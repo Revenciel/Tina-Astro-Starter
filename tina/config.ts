@@ -4,6 +4,7 @@ import { photoBandSchema } from "../src/components/bands/photo";
 import { textBandSchema } from "../src/components/bands/text";
 import { listBandSchema } from "../src/components/bands/pageList";
 import { ReferenceField, TextField } from "tinacms";
+import { externalLink, internalLink } from "../src/components/fieldComponents";
 
 // Your hosting provider likely exposes this as an environment variable
 // const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main";
@@ -116,21 +117,7 @@ export default defineConfig({
                 label: "Page to link to",
                 collections: ['page'],
                 ui: {
-                  component: (props) => {
-                    const typeOfLink = React.useMemo(() => {
-                      let fieldName = props.field.name;
-                      fieldName =
-                        fieldName.substring(0, fieldName.lastIndexOf(".")) || fieldName;
-                      return fieldName
-                        .split(".")
-                        .reduce((o, i) => o[i], props.tinaForm.values).linkType;
-                    }, [props.tinaForm.values]);
-
-                    if (typeOfLink !== "internal") {
-                      return null;
-                    }
-                    return ReferenceField(props);
-                  },
+                  component: internalLink,
                 },
               },
               {
@@ -138,44 +125,13 @@ export default defineConfig({
                 name: "url",
                 label: "URL",
                 ui: {
-                  component: (props) => {
-                    const typeOfLink = React.useMemo(() => {
-                      let fieldName = props.field.name;
-                      fieldName =
-                        fieldName.substring(0, fieldName.lastIndexOf(".")) || fieldName;
-                      return fieldName
-                        .split(".")
-                        .reduce((o, i) => o[i], props.tinaForm.values).linkType;
-                    }, [props.tinaForm.values]);
-
-                    if (typeOfLink !== "external") {
-                      return null;
-                    }
-                    return TextField(props);
-                  },
+                  component: externalLink,
                 },
               },
               {
                 type: "string",
                 name: "anchor",
                 label: "Link text",
-                ui: {
-                  component: (props) => {
-                    const typeOfLink = React.useMemo(() => {
-                      let fieldName = props.field.name;
-                      fieldName =
-                        fieldName.substring(0, fieldName.lastIndexOf(".")) || fieldName;
-                      return fieldName
-                        .split(".")
-                        .reduce((o, i) => o[i], props.tinaForm.values).linkType;
-                    }, [props.tinaForm.values]);
-
-                    if (typeOfLink !== "external") {
-                      return null;
-                    }
-                    return TextField(props);
-                  },
-                },
               },
             ],
           },

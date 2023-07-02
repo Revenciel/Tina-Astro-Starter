@@ -6,12 +6,28 @@
   "navLinks": [
     {
       "linkType": "internal",
-      "relativePath": "src/content/pages/about.mdx"
+      "relativePath": "src/content/pages/about.mdx",
+      "anchor": "About"
     },
     {
-      "linkType": "external",
-      "url": "https://www.youtube.com/watch?v=yP-29XsOm7k",
-      "anchor": "External"
+      "linkType": "internal",
+      "relativePath": "src/content/pages/program.mdx",
+      "anchor": "Program"
+    },
+    {
+      "linkType": "internal",
+      "relativePath": "src/content/pages/resources.mdx",
+      "anchor": "Resources"
+    },
+    {
+      "linkType": "internal",
+      "relativePath": "src/content/pages/news-and-events.mdx",
+      "anchor": "News & Events"
+    },
+    {
+      "linkType": "internal",
+      "relativePath": "src/content/pages/contact.mdx",
+      "anchor": "Contact"
     }
   ]
 }

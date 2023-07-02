@@ -1,7 +1,6 @@
 import { useTina, tinaField } from "tinacms/dist/react";
 import siteData from "../content/site-settings/index.json";
 import type { TinaProps } from "../types";
-import { Bands } from "../components/bands";
 
 export default function Header({ props }: { props: TinaProps }) {
     const { data } = useTina(props);
@@ -19,16 +18,16 @@ export default function Header({ props }: { props: TinaProps }) {
           <ul>
             {siteData.navLinks.map((link) => {
 
-                var destination = link.relativePath;
+                var destination = link.relativePath.replace("src/content/pages/","").replace(".mdx","");;
                 var target = "";
                 if (link.linkType === "external"){
                     target = "_blank";
+                    // Where is this error coming from?
                     destination = link.url;
-                    anchor = link.anchor;
                 }
                 // return appropriate link data
                 return (
-                    <li><a href={destination} target={target}>{anchor}</a></li>
+                    <li><a href={destination} target={target}>{link.anchor}</a></li>
                   )
             })}
           </ul>

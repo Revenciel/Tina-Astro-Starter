@@ -6,7 +6,7 @@
 - Block-based editing
 - Click-to-edit
 - Search documents in edit mode
-- Configurable nav links
+- Configurable nav links with dynamic from changes for internal and external links
 - nav link bug fix
 
 ### To do:
@@ -16,7 +16,6 @@
 - build starter components
 - build starter MDX components (buttons)
 - Make ability to set favicon in site settings
-- Improve UX for configurable nav links using templates (maybe - might be impossible)
 
 ### Thank you:
 - Ari Gibson, without whom this project would have been over before it got started
