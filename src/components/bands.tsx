@@ -4,7 +4,7 @@ import type { Page } from '../../tina/__generated__/types'
 // Import all bands:
 import Text from './bands/text';
 import Photo from './bands/photo';
-import List from './bands/pageList';
+import FlexContent from './bands/flexContent';
 
 export const Bands = (props: Page) => {
     return(
@@ -28,10 +28,10 @@ export const Bands = (props: Page) => {
                   </React.Fragment>
                 )
 
-              case 'PageBandsListBand':
+              case 'PageBandsFlexContent':
                 return (
                   <React.Fragment key={i + band!.__typename}>
-                    <List data={band} />
+                    <FlexContent data={band} />
                   </React.Fragment>
                 )
 

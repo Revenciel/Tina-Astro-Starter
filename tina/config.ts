@@ -2,8 +2,7 @@ import React from "react";
 import { defineConfig } from "tinacms";
 import { photoBandSchema } from "../src/components/bands/photo";
 import { textBandSchema } from "../src/components/bands/text";
-import { listBandSchema } from "../src/components/bands/pageList";
-import { ReferenceField, TextField } from "tinacms";
+import { flexContentBandSchema } from "../src/components/bands/flexContent";
 import { externalLink, internalLink } from "../src/components/fieldComponents";
 
 // Your hosting provider likely exposes this as an environment variable
@@ -171,9 +170,9 @@ export default defineConfig({
             },
             templates: [
               // add templates here
+              flexContentBandSchema,
               photoBandSchema,
               textBandSchema,
-              listBandSchema,
             ],
           },
         ],

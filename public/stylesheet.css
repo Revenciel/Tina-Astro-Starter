@@ -3,7 +3,7 @@
   --dark: #001d43;
   --light: #f4f4f4;
 
-  --spacer:20px;
+  --spacer: 20px;
 }
 
 *,
@@ -12,8 +12,8 @@
   box-sizing: border-box;
 }
 
-body{
-  margin:0;
+body {
+  margin: 0;
 }
 
 .grid {
@@ -30,55 +30,94 @@ body{
 
 /* ********** HEADER ********** */
 header {
-  background-color:aliceblue;
+  background-color: aliceblue;
   height: 100px;
-  padding:var(--spacer);
-  display:flex;
-  align-items:center;
+  padding: var(--spacer);
+  display: flex;
+  align-items: center;
   justify-content: space-between;
 }
-header #branding{
-  height:100%;
+header #branding {
+  height: 100%;
   color: var(--dark);
-  display:flex;
+  display: flex;
 }
 
-#branding .copy{
-  order:1;
+#branding .copy {
+  order: 1;
 }
 
-#tagline{
-  margin:0;/*dealing with defaults*/
+#tagline {
+  margin: 0; /*dealing with defaults*/
 }
 
-h1{
-  margin:0; /*dealing with defaults*/
+h1 {
+  margin: 0; /*dealing with defaults*/
 }
 
 #logo {
   height: 100%;
-  float:left;
-  order:0;
-  margin-right:var(--spacer);
+  float: left;
+  order: 0;
+  margin-right: var(--spacer);
 }
 
-nav li{
-  list-style:none;
-  display:inline;
-  padding-left:var(--spacer);
+nav li {
+  list-style: none;
+  display: inline;
+  padding-left: var(--spacer);
 }
 
-nav li:first-of-type{
-  padding-left:0;
+nav li:first-of-type {
+  padding-left: 0;
 }
 
+/* ********** FIELD COMPONENTS ********** */
+/* Opacity slider for background image */
+bgOpacity.\0{
+  color:red;
+}
+
+bgOpacity.\0:before {
+  opacity: 0.0;
+}
+bgOpacity.\1:before {
+  opacity: 0.1;
+}
+bgOpacity.\2:before {
+  opacity: 0.2;
+}
+bgOpacity.thirty:before {
+  opacity: 0.3;
+}
+bgOpacity.forty:before {
+  opacity: 0.4;
+}
+bgOpacity.fifty:before {
+  opacity: 0.5;
+}
+bgOpacity.sixty:before {
+  opacity: 0.6;
+}
+bgOpacity.seventy:before {
+  opacity: 0.7;
+}
+bgOpacity.eighty:before {
+  opacity: 0.8;
+}
+bgOpacity.ninety:before {
+  opacity: 0.9;
+}
+bgOpacity.hundred:before {
+  opacity: 1;
+}
 
 /* ********** CLICK-TO-EDIT ********** */
 /* Tina Admin Only */
 .__tina-quick-editing-enabled [data-tina-field] {
-    outline: 1px dotted lightgrey;
-  }
-  .__tina-quick-editing-enabled [data-tina-field]:hover {
-    outline: 2px dotted pink;
-    box-shadow:none;
-  }
+  outline: 1px dotted lightgrey;
+}
+.__tina-quick-editing-enabled [data-tina-field]:hover {
+  outline: 2px dotted pink;
+  box-shadow: none;
+}

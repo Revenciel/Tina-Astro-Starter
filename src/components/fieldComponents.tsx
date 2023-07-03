@@ -1,5 +1,12 @@
-import { TextField, ReferenceField } from "tinacms";
+import { TextField, ReferenceField, wrapFieldsWithMeta } from "tinacms";
 import React from "react";
+
+// ********** REUSABLE FIELD COMPONENTS **********
+
+
+
+// ********** NON-REUSABLE FIELD COMPONENTS **********
+// These were made for conditionally rendering fields on specific components or documents
 
 export const internalLink = (props) => {
   console.log(props);
