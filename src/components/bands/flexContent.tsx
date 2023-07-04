@@ -11,13 +11,23 @@ const hidden: CSS.Properties = { display:'none', }
     if (numCols < colNum ){ return hidden; }
 }
 
-function bandBg(img: string, op: number){
-    var style:CSS.Properties = {
-        //backgroundImage:`url(${img})`,
-        background:`linear-gradient(rgba(255,255,255,${op}),rgba(255,255,255,${op})),url('${img}')`,
-    };
+function bandBg(color: string, img: string, op: number){
+    var style:CSS.Properties;
 
-    if 
+    if (img === null){
+        style = {
+            backgroundColor:color,
+        };
+    }
+    
+    else{
+        style = {
+        //backgroundImage:`url(${img})`,
+        background:`linear-gradient(rgba(0,0,0,${op}),rgba(255,255,255,${op})),url('${img}')`,
+        };
+    }
+
+    
     
     if (img === null){
         style = {backgroundImage:'none'};
@@ -53,7 +63,7 @@ export default function FlexContent({ data }: {
     console.log(data.background?.image);
 
     return (
-        <section className="flexContent" style={bandBg(data.background?.image, data.background?.opacity)}>
+        <section className="flexContent" style={bandBg(data.background?.color, data.background?.image, data.background?.opacity)}>
             <div style={hideCol(data.numCols,1)}>{data.colOne}</div>
             <div style={hideCol(data.numCols,2)}>{data.colTwo}</div>
             <div style={hideCol(data.numCols,3)}>{data.colThree}</div>
