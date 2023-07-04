@@ -72,43 +72,50 @@ nav li:first-of-type {
   padding-left: 0;
 }
 
+
+/*
+
+linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), 
+                url('https://images.freeimages.com/images/large-previews/48d/woodgrain-texture-1151631.jpg')
+*/
+
 /* ********** FIELD COMPONENTS ********** */
 /* Opacity slider for background image */
-bgOpacity.\0{
+.bgOpacity.zero{
   color:red;
 }
 
-bgOpacity.\0:before {
-  opacity: 0.0;
+.bgOpacity.zero::after {
+  opacity: 0;
 }
-bgOpacity.\1:before {
+.bgOpacity.one:before {
   opacity: 0.1;
 }
-bgOpacity.\2:before {
+.bgOpacity.two:before {
   opacity: 0.2;
 }
-bgOpacity.thirty:before {
+.bgOpacity.three:before {
   opacity: 0.3;
 }
-bgOpacity.forty:before {
+.bgOpacity.forty:before {
   opacity: 0.4;
 }
-bgOpacity.fifty:before {
+.bgOpacity.fifty:before {
   opacity: 0.5;
 }
-bgOpacity.sixty:before {
+.bgOpacity.sixty:before {
   opacity: 0.6;
 }
-bgOpacity.seventy:before {
+.bgOpacity.seventy:before {
   opacity: 0.7;
 }
-bgOpacity.eighty:before {
+.bgOpacity.eighty:before {
   opacity: 0.8;
 }
-bgOpacity.ninety:before {
+.bgOpacity.ninety:before {
   opacity: 0.9;
 }
-bgOpacity.hundred:before {
+.bgOpacity.hundred:before {
   opacity: 1;
 }
 

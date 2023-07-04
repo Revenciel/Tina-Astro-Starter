@@ -11,22 +11,26 @@ const hidden: CSS.Properties = { display:'none', }
     if (numCols < colNum ){ return hidden; }
 }
 
-function bandBg(img: string){
-    const style:CSS.Properties = {
-        backgroundImage:`url(${img})`,
+function bandBg(img: string, op: number){
+    var style:CSS.Properties = {
+        //backgroundImage:`url(${img})`,
+        background:`linear-gradient(rgba(255,255,255,${op}),rgba(255,255,255,${op})),url('${img}')`,
     };
+
+    if 
     
     if (img === null){
-        return null;
+        style = {backgroundImage:'none'};
+        return style;
     }
     return style;
 
     
 }
 
-function setOpacityClass(opacity: number){
-    return ("flexContent bgOpacity " + opacity);
-}
+// function setOpacityClass(opacity: string){
+//     return ("flexContent bgOpacity " + opacity);
+// }
 
 
 
@@ -49,7 +53,7 @@ export default function FlexContent({ data }: {
     console.log(data.background?.image);
 
     return (
-        <section className={setOpacityClass(data.background?.opacity)} style={bandBg(data.background?.image)}>
+        <section className="flexContent" style={bandBg(data.background?.image, data.background?.opacity)}>
             <div style={hideCol(data.numCols,1)}>{data.colOne}</div>
             <div style={hideCol(data.numCols,2)}>{data.colTwo}</div>
             <div style={hideCol(data.numCols,3)}>{data.colThree}</div>
@@ -128,12 +132,6 @@ export const flexContentBandSchema: Template = {
             name:'background',
             type:'object',
             label:'Choose a background color or image',
-            ui: {
-                defaultItem:{
-                  imgOpacity:'0.75',
-                  lightText:false,  
-                },
-            },
             fields:[
                 {
                     //bg color
