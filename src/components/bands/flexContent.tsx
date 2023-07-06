@@ -133,11 +133,6 @@ export const flexContentBandSchema: Template = {
             name:'background',
             type:'object',
             label:'Choose a background color or image',
-            ui:{
-                // defaultItem:{
-                //     opacity:0.5,
-                // },
-            },
             fields:[
                 {
                     //bg color
@@ -147,8 +142,8 @@ export const flexContentBandSchema: Template = {
                     ui: {
                         component: 'color',
                         colorFormat: 'rgb',
-                        //colors: ['#EC4815', '#241748', '#B4F4E0', '#E6FAF8'],
                         widget: 'block',
+                        //colors: ['#EC4815', '#241748', '#B4F4E0', '#E6FAF8'],
                     },
                 },
                 {
@@ -162,7 +157,7 @@ export const flexContentBandSchema: Template = {
                     name:'opacity',
                     type:'number',
                     label:'Background Overlay Opacity',
-                    description:'If you use a background image, your text may look best by setting the background color to black, the image opacity to ~0.25, and the text to light.',
+                    description:'Tip: if your text is difficult to read, try setting the background color to black, the overlay opacity to 0.25, and the text to a light color.',
                 },
                 {
                     name:'textColor',
@@ -171,6 +166,7 @@ export const flexContentBandSchema: Template = {
                     ui:{
                         component:'color',
                         widget:'block',
+                        //colors: ['#EC4815', '#241748', '#B4F4E0', '#E6FAF8'],
                     },
                 },
             ],

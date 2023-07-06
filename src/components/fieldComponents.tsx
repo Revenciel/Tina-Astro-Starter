@@ -1,4 +1,4 @@
-import { TextField, ReferenceField, wrapFieldsWithMeta } from "tinacms";
+import { TextField, ReferenceField } from "tinacms";
 import React from "react";
 
 // ********** REUSABLE FIELD COMPONENTS **********
@@ -9,7 +9,6 @@ import React from "react";
 // These were made for conditionally rendering fields on specific components or documents
 
 export const internalLink = (props) => {
-  console.log(props);
   const typeOfLink = React.useMemo(() => {
     let fieldName = props.field.name;
     fieldName = fieldName.substring(0, fieldName.lastIndexOf(".")) || fieldName;
