@@ -6,9 +6,8 @@ import type { CSSProperties } from "react";
 import type CSS from 'csstype';
 
 function hideCol(numCols: number, colNum: number){
-
-const hidden: CSS.Properties = { display:'none', }
-    if (numCols < colNum ){ return hidden; }
+    const hidden: CSS.Properties = { display:'none', }
+        if (numCols < colNum ){ return hidden; }
 }
 
 function bandBg(color: string, img: string, op: number){
@@ -19,34 +18,23 @@ function bandBg(color: string, img: string, op: number){
             backgroundColor:color,
         };
     }
-    
+
+    else if (op === null){
+        style = {backgroundImage:`url(${img})`};
+    }
+
     else{
         style = {
-        //backgroundImage:`url(${img})`,
         background:`linear-gradient(rgba(0,0,0,${op}),rgba(255,255,255,${op})),url('${img}')`,
         };
     }
 
-    
-    
-    if (img === null){
-        style = {backgroundImage:'none'};
-        return style;
-    }
-    return style;
-
-    
+    return style;    
 }
-
-// function setOpacityClass(opacity: string){
-//     return ("flexContent bgOpacity " + opacity);
-// }
-
-
 
 export default function FlexContent({ data }: {
     data: {
-        numCols:number,
+        numCols:string,
         colOne: string,
         colTwo: string,
         colThree: string,
@@ -59,15 +47,12 @@ export default function FlexContent({ data }: {
     }
 }) {
 
-    //const bgImg: CSSProperties = {backgroundImage: data.background.image};
-    console.log(data.background?.image);
-
     return (
         <section className="flexContent" style={bandBg(data.background?.color, data.background?.image, data.background?.opacity)}>
-            <div style={hideCol(data.numCols,1)}>{data.colOne}</div>
-            <div style={hideCol(data.numCols,2)}>{data.colTwo}</div>
-            <div style={hideCol(data.numCols,3)}>{data.colThree}</div>
-            <div style={hideCol(data.numCols,4)}>{data.colFour}</div>
+            <div style={hideCol(Number(data.numCols),1)}>{data.colOne}</div>
+            <div style={hideCol(Number(data.numCols),2)}>{data.colTwo}</div>
+            <div style={hideCol(Number(data.numCols),3)}>{data.colThree}</div>
+            <div style={hideCol(Number(data.numCols),4)}>{data.colFour}</div>
         </section>
     );
 };
@@ -83,27 +68,27 @@ export const flexContentBandSchema: Template = {
     fields: [
         {
             name:'numCols',
-            type:'number',
+            type:'string', // Has to be a string to properly support options
             label:'Number of Columns',
-            // Why is the component not showing?
             ui: {
                 component:'button-toggle',
             },
-            options: [
+            // options only work with string values
+            options: [ 
                 {
-                    label:'One',
+                    label:"One",
                     value:'1',
                 },
                 {
-                    label:'Two',
+                    label:"Two",
                     value:'2',
                 },
                 {
-                    label:'Three',
+                    label:"Three",
                     value:'3',
                 },
                 {
-                    label:'Four',
+                    label:"Four",
                     value:'4',
                 },
             ]
@@ -148,6 +133,9 @@ export const flexContentBandSchema: Template = {
                     name:'color',
                     type:'string',
                     label:'Background Color',
+                    ui: {
+                        component: 'color',
+                    },
                 },
                 {
                     //bg image
