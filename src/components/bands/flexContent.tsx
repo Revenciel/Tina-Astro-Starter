@@ -11,30 +11,24 @@ function hideCol(numCols: number, colNum: number){
         if (numCols < colNum ){ return hidden; }
 }
 
-function bandBg(color: string, img: string, op: number){
+function bandBg(color: string, img: string, op: number, textCol:string){
     var style:CSS.Properties;
 
     if (!img && !color){
-        style = { background:'none' };
+        style = { background:'none',color:textCol};
     }
     else if (!img){
-        style = { backgroundColor:color, };        
+        style = { backgroundColor:color, color:textCol};        
     }
     else if (!color || !op){
-        style = { backgroundImage:`url(${img})` };
+        style = { backgroundImage:`url(${img})`, color:textCol };
     }
-    else{ //rgb(12, 134, 10)
-        // RGBs is an array of each value in color, which is in RGB format
-        console.log(color);
+    else{
         const RGBs = color.substring(4,color.length-1).replace(/ /g,'').split(',');
-        //console.log("RGBs: " + RGBs[0] + RGBs[1] + RGBs[2]);
-        style = {
-        //background:`linear-gradient(rgba(0,0,0,${op}),rgba(255,255,255,${op})),url('${img}')`,
+
         // using linear-background image so that we can overlay the background image with a semi-transparent solid color, impossible with backgroundImage
-
-        background:`linear-gradient(rgba(${Number(RGBs[0])},${Number(RGBs[1])},${Number(RGBs[2])},${op}),rgba(${Number(RGBs[0])},${Number(RGBs[1])},${Number(RGBs[2])},${op})),url('${img}')`,
-
-        //background:`linear-gradient(rgba(${RGBs[0]},${RGBs[1]},${RGBs[2]},${op}),rgba(${RGBs[0]},${RGBs[1]},${RGBs[2]},${op})),url('${img}')`,
+        style = {
+            background:`linear-gradient(rgba(${Number(RGBs[0])},${Number(RGBs[1])},${Number(RGBs[2])},${op}),rgba(${Number(RGBs[0])},${Number(RGBs[1])},${Number(RGBs[2])},${op})),url('${img}')`, color:textCol,
         };
     }
     return style;    
@@ -51,13 +45,13 @@ export default function FlexContent({ data }: {
             color: any, //resolve type error
             image: string,
             opacity:number,
+            textColor: any,
         }
     }
 }) {
 
     return (
-        <section className="flexContent" style={bandBg(data.background?.color, data.background?.image, data.background?.opacity)}>
-            {data.background?.color}
+        <section className="flexContent" style={bandBg(data.background?.color, data.background?.image, data.background?.opacity, data.background?.textColor)}>
             <div style={hideCol(Number(data.numCols),1)}>{data.colOne}</div>
             <div style={hideCol(Number(data.numCols),2)}>{data.colTwo}</div>
             <div style={hideCol(Number(data.numCols),3)}>{data.colThree}</div>
@@ -72,6 +66,9 @@ export const flexContentBandSchema: Template = {
     ui:{
         defaultItem:{
             numCols:'1',
+            background:{
+                opacity:0.25,
+            },
         },
     },
     fields: [
@@ -136,6 +133,11 @@ export const flexContentBandSchema: Template = {
             name:'background',
             type:'object',
             label:'Choose a background color or image',
+            ui:{
+                // defaultItem:{
+                //     opacity:0.5,
+                // },
+            },
             fields:[
                 {
                     //bg color
@@ -146,7 +148,7 @@ export const flexContentBandSchema: Template = {
                         component: 'color',
                         colorFormat: 'rgb',
                         //colors: ['#EC4815', '#241748', '#B4F4E0', '#E6FAF8'],
-                        widget: 'sketch',
+                        widget: 'block',
                     },
                 },
                 {
@@ -159,8 +161,17 @@ export const flexContentBandSchema: Template = {
                     //bg image opacity
                     name:'opacity',
                     type:'number',
-                    label:'Background Image Opacity',
-                    description:'If you use a background image, your text may look best by setting the background color to black, the image opacity to ~75%, and the text to light.',
+                    label:'Background Overlay Opacity',
+                    description:'If you use a background image, your text may look best by setting the background color to black, the image opacity to ~0.25, and the text to light.',
+                },
+                {
+                    name:'textColor',
+                    type:'string',
+                    label:'Text Color',
+                    ui:{
+                        component:'color',
+                        widget:'block',
+                    },
                 },
             ],
         },
