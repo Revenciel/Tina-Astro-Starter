@@ -4,6 +4,7 @@ import { TinaMarkdown } from "tinacms/dist/rich-text";
 import type { Template } from "tinacms";
 import type { CSSProperties } from "react";
 import type CSS from 'csstype';
+import type { ColorFieldProps } from "tinacms";
 
 function hideCol(numCols: number, colNum: number){
     const hidden: CSS.Properties = { display:'none', }
@@ -13,22 +14,29 @@ function hideCol(numCols: number, colNum: number){
 function bandBg(color: string, img: string, op: number){
     var style:CSS.Properties;
 
-    if (img === null){
+    if (!img && !color){
+        style = { background:'none' };
+    }
+    else if (!img){
+        style = { backgroundColor:color, };        
+    }
+    else if (!color || !op){
+        style = { backgroundImage:`url(${img})` };
+    }
+    else{ //rgb(12, 134, 10)
+        // RGBs is an array of each value in color, which is in RGB format
+        console.log(color);
+        const RGBs = color.substring(4,color.length-1).replace(/ /g,'').split(',');
+        //console.log("RGBs: " + RGBs[0] + RGBs[1] + RGBs[2]);
         style = {
-            backgroundColor:color,
+        //background:`linear-gradient(rgba(0,0,0,${op}),rgba(255,255,255,${op})),url('${img}')`,
+        // using linear-background image so that we can overlay the background image with a semi-transparent solid color, impossible with backgroundImage
+
+        background:`linear-gradient(rgba(${Number(RGBs[0])},${Number(RGBs[1])},${Number(RGBs[2])},${op}),rgba(${Number(RGBs[0])},${Number(RGBs[1])},${Number(RGBs[2])},${op})),url('${img}')`,
+
+        //background:`linear-gradient(rgba(${RGBs[0]},${RGBs[1]},${RGBs[2]},${op}),rgba(${RGBs[0]},${RGBs[1]},${RGBs[2]},${op})),url('${img}')`,
         };
     }
-
-    else if (op === null){
-        style = {backgroundImage:`url(${img})`};
-    }
-
-    else{
-        style = {
-        background:`linear-gradient(rgba(0,0,0,${op}),rgba(255,255,255,${op})),url('${img}')`,
-        };
-    }
-
     return style;    
 }
 
@@ -40,7 +48,7 @@ export default function FlexContent({ data }: {
         colThree: string,
         colFour: string,
         background: {
-            color: string,
+            color: any, //resolve type error
             image: string,
             opacity:number,
         }
@@ -49,6 +57,7 @@ export default function FlexContent({ data }: {
 
     return (
         <section className="flexContent" style={bandBg(data.background?.color, data.background?.image, data.background?.opacity)}>
+            {data.background?.color}
             <div style={hideCol(Number(data.numCols),1)}>{data.colOne}</div>
             <div style={hideCol(Number(data.numCols),2)}>{data.colTwo}</div>
             <div style={hideCol(Number(data.numCols),3)}>{data.colThree}</div>
@@ -135,6 +144,9 @@ export const flexContentBandSchema: Template = {
                     label:'Background Color',
                     ui: {
                         component: 'color',
+                        colorFormat: 'rgb',
+                        //colors: ['#EC4815', '#241748', '#B4F4E0', '#E6FAF8'],
+                        widget: 'sketch',
                     },
                 },
                 {
