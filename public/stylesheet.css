@@ -28,6 +28,10 @@ body {
   column-gap: var(--spacer);
 }
 
+h2{
+  grid-column: 2 / span 8;
+}
+
 /* ********** HEADER ********** */
 header {
   background-color: aliceblue;
@@ -73,22 +77,7 @@ nav li:first-of-type {
 }
 
 /* ********** FIELD COMPONENTS ********** */
-/* Flex Content */
-.flexContent .xsm{
-  grid-column: 2 / span 3;
-}
-.flexContent .sm{
-  grid-column: 2 / span 4;
-}
-.flexContent .med{
-  grid-column: 2 / span 6;
-}
-.flexContent .lg{
-  grid-column: 2 / span 8;
-}
-.flexContent .xlg{
-  grid-column: 2 / span 9;
-}
+
 
 /* ********** CLICK-TO-EDIT ********** */
 /* Tina Admin Only */

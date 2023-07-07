@@ -5,31 +5,58 @@ import type { Template } from "tinacms";
 import type CSS from 'csstype';
 
 
-
-function hideCol(numCols: number, colNum: number){
-    const hidden: CSS.Properties = { display:'none', }
-        if (numCols < colNum ){ return hidden; }
+//Conditionally render columns & set column widths.
+//Based on 14 columns, the bookends of which are page margins (12 column layout)
+function colStyle(numCols: number, colNum: number, colWidth: string){
+    
+    var colConfig: CSS.Properties = { display:'none', }
+        if (numCols < colNum ){ return colConfig; }
+        if (numCols === 1) {
+            colConfig = {gridColumn: '2 / span 12'}
+            return colConfig;
+        }
+        if (numCols === 2 && colNum === 1){
+            colConfig = { gridColumn:`2 / span ${colWidth}` }
+            return colConfig;
+        }
+        if (numCols === 2 && colNum === 2){
+            colConfig = { gridColumn: `${Number(colWidth) + 2} / span ${12 - Number(colWidth)}`}
+            return colConfig;
+        }
+        if (numCols === 3 && colNum === 1){
+            colConfig = {gridColumn: '2 / span 4'}
+            return colConfig;
+        }
+        if (numCols === 3 && colNum === 2){
+            colConfig = {gridColumn: '6 / span 4'}
+            return colConfig;
+        }
+        if (numCols === 3 && colNum === 3){
+            colConfig = {gridColumn: '10 / span 4'}
+            return colConfig;
+        }
+        if (numCols === 4 && colNum === 1){
+            colConfig = {gridColumn: '2 / span 3'}
+            return colConfig;
+        }
+        if (numCols === 4 && colNum === 2){
+            colConfig = {gridColumn: '5 / span 3'}
+            return colConfig;
+        }
+        if (numCols === 4 && colNum === 3){
+            colConfig = {gridColumn: '8 / span 3'}
+            return colConfig;
+        }
+        if (numCols === 4 && colNum === 4){
+            colConfig = {gridColumn: '11 / span 3'}
+            return colConfig;
+        }
+        return;
 }
 
-function colOneWidth(width:string){
-    var w = Number(width);
-    if (w = 3){
-        return "xsm";
-    }
-    if (w = 4){
-        return "sm";
-    }
-    if (w = 6){
-        return "med";
-    }
-    if (w = 8){
-        return "lg";
-    }
-    return "xlg";
-}
-
-function bandBg(color: string, img: string, op: number, textCol:string){
+function bandBg(color: string, img: string, op: string, textCol:string){
     var style:CSS.Properties;
+    const opacity = Number(op);
 
     if (!img && !color){
         style = { background:'none',color:textCol};
@@ -38,14 +65,14 @@ function bandBg(color: string, img: string, op: number, textCol:string){
         style = { backgroundColor:color, color:textCol};        
     }
     else if (!color || !op){
-        style = { backgroundImage:`url(${img})`, color:textCol };
+        style = { backgroundImage:`url(${img})`, backgroundSize: 'cover', color:textCol };
     }
     else{
         const RGBs = color.substring(4,color.length-1).replace(/ /g,'').split(',');
 
         // using linear-background image so that we can overlay the background image with a semi-transparent solid color, impossible with backgroundImage
         style = {
-            background:`linear-gradient(rgba(${Number(RGBs[0])},${Number(RGBs[1])},${Number(RGBs[2])},${op}),rgba(${Number(RGBs[0])},${Number(RGBs[1])},${Number(RGBs[2])},${op})),url('${img}')`, color:textCol,
+            background:`linear-gradient(rgba(${Number(RGBs[0])},${Number(RGBs[1])},${Number(RGBs[2])},${opacity}),rgba(${Number(RGBs[0])},${Number(RGBs[1])},${Number(RGBs[2])},${Number(opacity)})),url('${img}')`, backgroundSize:'cover',color:textCol,
         };
     }
     return style;    
@@ -70,16 +97,17 @@ export default function FlexContent({ data }: {
 
     return (
         <section className="flexContent grid" style={bandBg(data.background?.color, data.background?.image, data.background?.opacity, data.background?.textColor)}>
-            <div className={colOneWidth(data.colRatio)}data-tina-field={tinaField(data, 'colOne')}>
+            <h2 data-tina-field={tinaField(data.title)}>{data.title}</h2>
+            <div data-tina-field={tinaField(data, 'colOne')} style={colStyle(Number(data.numCols),1,data.colRatio)}>
                 <TinaMarkdown content={data.colOne}/>
             </div>
-            <div data-tina-field={tinaField(data, 'colTwo')} style={hideCol(Number(data.numCols),2)}>
+            <div data-tina-field={tinaField(data, 'colTwo')} style={colStyle(Number(data.numCols),2,data.colRatio)}>
                 <TinaMarkdown content={data.colTwo} />
             </div>
-            <div data-tina-field={tinaField(data, 'colThree')} style={hideCol(Number(data.numCols),3)}>
+            <div data-tina-field={tinaField(data, 'colThree')} style={colStyle(Number(data.numCols),3,data.colRatio)}>
                 <TinaMarkdown content={data.colThree}/>
             </div>
-            <div data-tina-field={tinaField(data, 'colFour')} style={hideCol(Number(data.numCols),4)}>
+            <div data-tina-field={tinaField(data, 'colFour')} style={colStyle(Number(data.numCols),4,data.colRatio)}>
                 <TinaMarkdown content={data.colFour}/>
             </div>
         </section>
@@ -92,12 +120,19 @@ export const flexContentBandSchema: Template = {
     ui:{
         defaultItem:{
             numCols:'1',
+            colRatio:'6',
             background:{
-                opacity:0.25,
+                opacity:'0',
             },
         },
     },
     fields: [
+        {
+            name:'title',
+            type:'string',
+            label:'Band Title',
+            description:'Optional',
+        },
         {
             name:'numCols',
             type:'string', // Has to be a string to properly support options
@@ -129,6 +164,7 @@ export const flexContentBandSchema: Template = {
             name: 'colRatio',
             type: 'string',
             label: 'Column Ratio',
+            description:'Only applicable to two-column layout',
             ui:{
                 component:'button-toggle',
                 direction:'vertical',
@@ -214,9 +250,30 @@ export const flexContentBandSchema: Template = {
                 {
                     //bg image opacity
                     name:'opacity',
-                    type:'number',
-                    label:'Background Overlay Opacity',
-                    description:'Tip: if your text is difficult to read, try setting the background color to black, the overlay opacity to 0.25, and the text to a light color.',
+                    type:'string',
+                    label:'Image Opacity',
+                    description:'Tip: if your text is difficult to read, try setting the background color to black, the image opacity to 75%, and the text to a light color.',
+                    ui:{
+                        component:'button-toggle',
+                    },
+                    options: [
+                        {
+                            value:'0',
+                            label:'100%',
+                        },
+                        {
+                            value:'0.25',
+                            label:'75%',
+                        },
+                        {
+                            value:'0.5',
+                            label:'50%',
+                        },
+                        {
+                            value:'0.75',
+                            label:'25%',
+                        },
+                    ],
                 },
                 {
                     name:'textColor',

@@ -6,15 +6,17 @@
 - Block-based editing
 - Click-to-edit
 - Search documents in edit mode
-- Configurable nav links with dynamic from changes for internal and external links
-- nav link bug fix
+- Configurable nav links with dynamic form changes for internal and external links
 
 ### To do:
-- make it so index cannot be deleted in the Tina editor
+- nav link bug fix
+- Conditionally render form fields in the flexContent component
+- Make mobile version of navigation
+- Make separate home page collection, distinctive from page collection
+- - This will make it possible to prevent the home page from being deleted, as well as omit page title from the home page
 - implement blog
 - - Make it possible to all list blog pages in a component
-- build starter components
-- build starter MDX components (buttons)
+- build starter MDX component (buttons)
 - Make ability to set favicon in site settings
 
 ### Thank you:
