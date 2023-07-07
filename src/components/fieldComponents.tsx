@@ -1,4 +1,4 @@
-import { TextField, ReferenceField } from "tinacms";
+import { TextField, ReferenceField, ButtonToggleField, ButtonToggle } from "tinacms";
 import React from "react";
 
 // ********** REUSABLE FIELD COMPONENTS **********
@@ -34,4 +34,12 @@ export const externalLink = (props) => {
     return null;
   }
   return TextField(props);
+};
+
+export const columnWidthToggle = (props) => {
+  const numCols = React.useMemo(() => {
+    let fieldname = props.field.name;
+    console.log(fieldname);
+  }, [props.tinaForm.values]);
+  return ButtonToggle(props);
 };

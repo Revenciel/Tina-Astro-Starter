@@ -72,51 +72,22 @@ nav li:first-of-type {
   padding-left: 0;
 }
 
-
-/*
-
-linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), 
-                url('https://images.freeimages.com/images/large-previews/48d/woodgrain-texture-1151631.jpg')
-*/
-
 /* ********** FIELD COMPONENTS ********** */
-/* Opacity slider for background image */
-.bgOpacity.zero{
-  color:red;
+/* Flex Content */
+.flexContent .xsm{
+  grid-column: 2 / span 3;
 }
-
-.bgOpacity.zero::after {
-  opacity: 0;
+.flexContent .sm{
+  grid-column: 2 / span 4;
 }
-.bgOpacity.one:before {
-  opacity: 0.1;
+.flexContent .med{
+  grid-column: 2 / span 6;
 }
-.bgOpacity.two:before {
-  opacity: 0.2;
+.flexContent .lg{
+  grid-column: 2 / span 8;
 }
-.bgOpacity.three:before {
-  opacity: 0.3;
-}
-.bgOpacity.forty:before {
-  opacity: 0.4;
-}
-.bgOpacity.fifty:before {
-  opacity: 0.5;
-}
-.bgOpacity.sixty:before {
-  opacity: 0.6;
-}
-.bgOpacity.seventy:before {
-  opacity: 0.7;
-}
-.bgOpacity.eighty:before {
-  opacity: 0.8;
-}
-.bgOpacity.ninety:before {
-  opacity: 0.9;
-}
-.bgOpacity.hundred:before {
-  opacity: 1;
+.flexContent .xlg{
+  grid-column: 2 / span 9;
 }
 
 /* ********** CLICK-TO-EDIT ********** */

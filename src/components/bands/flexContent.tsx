@@ -2,13 +2,30 @@ import React from "react";
 import { tinaField } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import type { Template } from "tinacms";
-import type { CSSProperties } from "react";
 import type CSS from 'csstype';
-import type { ColorFieldProps } from "tinacms";
+
+
 
 function hideCol(numCols: number, colNum: number){
     const hidden: CSS.Properties = { display:'none', }
         if (numCols < colNum ){ return hidden; }
+}
+
+function colOneWidth(width:string){
+    var w = Number(width);
+    if (w = 3){
+        return "xsm";
+    }
+    if (w = 4){
+        return "sm";
+    }
+    if (w = 6){
+        return "med";
+    }
+    if (w = 8){
+        return "lg";
+    }
+    return "xlg";
 }
 
 function bandBg(color: string, img: string, op: number, textCol:string){
@@ -37,10 +54,11 @@ function bandBg(color: string, img: string, op: number, textCol:string){
 export default function FlexContent({ data }: {
     data: {
         numCols:string,
-        colOne: string,
-        colTwo: string,
-        colThree: string,
-        colFour: string,
+        colRatio:string,
+        colOne: any,
+        colTwo: any,
+        colThree: any,
+        colFour: any,
         background: {
             color: any, //resolve type error
             image: string,
@@ -51,11 +69,19 @@ export default function FlexContent({ data }: {
 }) {
 
     return (
-        <section className="flexContent" style={bandBg(data.background?.color, data.background?.image, data.background?.opacity, data.background?.textColor)}>
-            <div style={hideCol(Number(data.numCols),1)}>{data.colOne}</div>
-            <div style={hideCol(Number(data.numCols),2)}>{data.colTwo}</div>
-            <div style={hideCol(Number(data.numCols),3)}>{data.colThree}</div>
-            <div style={hideCol(Number(data.numCols),4)}>{data.colFour}</div>
+        <section className="flexContent grid" style={bandBg(data.background?.color, data.background?.image, data.background?.opacity, data.background?.textColor)}>
+            <div className={colOneWidth(data.colRatio)}data-tina-field={tinaField(data, 'colOne')}>
+                <TinaMarkdown content={data.colOne}/>
+            </div>
+            <div data-tina-field={tinaField(data, 'colTwo')} style={hideCol(Number(data.numCols),2)}>
+                <TinaMarkdown content={data.colTwo} />
+            </div>
+            <div data-tina-field={tinaField(data, 'colThree')} style={hideCol(Number(data.numCols),3)}>
+                <TinaMarkdown content={data.colThree}/>
+            </div>
+            <div data-tina-field={tinaField(data, 'colFour')} style={hideCol(Number(data.numCols),4)}>
+                <TinaMarkdown content={data.colFour}/>
+            </div>
         </section>
     );
 };
@@ -77,7 +103,7 @@ export const flexContentBandSchema: Template = {
             type:'string', // Has to be a string to properly support options
             label:'Number of Columns',
             ui: {
-                component:'button-toggle',
+                component: 'button-toggle',
             },
             // options only work with string values
             options: [ 
@@ -100,23 +126,56 @@ export const flexContentBandSchema: Template = {
             ]
         },
         {
-            name: 'colOne',
+            name: 'colRatio',
             type: 'string',
-            label: 'First Column'
+            label: 'Column Ratio',
+            ui:{
+                component:'button-toggle',
+                direction:'vertical',
+            },
+            options: [
+                {
+                    label:'[---] [---------]',
+                    // number of columns 1st column should take up, out of 12 columns
+                    value:'3',
+                },
+                {
+                    label:'[----] [--------]',
+                    value:'4'
+                },
+                {
+                    label:'[------] [------]',
+                    value:'6',
+                },
+                {
+                    label:'[--------] [----]',
+                    value:'8',
+                },
+                {
+                    label:'[---------] [---]',
+                    value:'9',
+                },
+            ],
+        },
+        {
+            name: 'colOne',
+            type: 'rich-text',
+            label: 'First Column',
         },
         {
             name: 'colTwo',
-            type: 'string',
+            type: 'rich-text',
             label: 'Second Column',
+            
         },
         {
             name: 'colThree',
-            type: 'string',
+            type: 'rich-text',
             label: 'Third Column',
         },
         {
             name: 'colFour',
-            type: 'string',
+            type: 'rich-text',
             label: 'Fourth Column',
         },
         // {
