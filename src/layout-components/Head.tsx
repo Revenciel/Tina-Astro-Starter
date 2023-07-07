@@ -11,6 +11,9 @@ export default function Head({ props }: { props: TinaProps }) {
       {`${data.page.title} | ${siteData.title}`}
     </title>
     <link rel="stylesheet" href="/stylesheet.css" />
+
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <meta charSet="UTF-8" />
   </head>
   );
 }

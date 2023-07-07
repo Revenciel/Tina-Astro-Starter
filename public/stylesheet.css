@@ -76,6 +76,14 @@ nav li:first-of-type {
   padding-left: 0;
 }
 
+/* ********** BANDS ********** */
+.flexContent img{
+  max-width:100%;
+}
+.flexContent .column.ofOne{
+  grid-column: 2 / span 8 !important;
+}
+
 /* ********** FIELD COMPONENTS ********** */
 
 
@@ -87,4 +95,23 @@ nav li:first-of-type {
 .__tina-quick-editing-enabled [data-tina-field]:hover {
   outline: 2px dotted pink;
   box-shadow: none;
+}
+
+/* ********** RESPONSIVITY ********** */
+@media only screen and (max-width: 900px) {
+  .flexContent .column.ofOne{
+    grid-column: 2 / span 12 !important;
+  }
+  .flexContent .column.ofTwo{
+    grid-column: 2 / span 12 !important;
+  }
+  .flexContent .column.ofThree{
+    grid-column: 2 / span 12 !important;
+  }
+}
+
+@media only screen and (max-width: 1080px) {
+  .flexContent .column.ofFour{
+    grid-column: 2 / span 12 !important;
+  }
 }

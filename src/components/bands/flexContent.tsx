@@ -7,6 +7,21 @@ import type CSS from 'csstype';
 
 //Conditionally render columns & set column widths.
 //Based on 14 columns, the bookends of which are page margins (12 column layout)
+function colClass(numCols:string){
+    if (numCols === '1'){
+        return "ofOne"
+    }
+    if (numCols === '2'){
+        return "ofTwo"
+    }
+    if (numCols === '3'){
+        return "ofThree"
+    }
+    if (numCols === '4'){
+        return "ofFour"
+    }
+}
+
 function colStyle(numCols: number, colNum: number, colWidth: string){
     
     var colConfig: CSS.Properties = { display:'none', }
@@ -98,16 +113,16 @@ export default function FlexContent({ data }: {
     return (
         <section className="flexContent grid" style={bandBg(data.background?.color, data.background?.image, data.background?.opacity, data.background?.textColor)}>
             <h2 data-tina-field={tinaField(data.title)}>{data.title}</h2>
-            <div data-tina-field={tinaField(data, 'colOne')} style={colStyle(Number(data.numCols),1,data.colRatio)}>
+            <div className={"column " + colClass(data.numCols)} data-tina-field={tinaField(data, 'colOne')} style={colStyle(Number(data.numCols),1,data.colRatio)}>
                 <TinaMarkdown content={data.colOne}/>
             </div>
-            <div data-tina-field={tinaField(data, 'colTwo')} style={colStyle(Number(data.numCols),2,data.colRatio)}>
+            <div className={"column " + colClass(data.numCols)} data-tina-field={tinaField(data, 'colTwo')} style={colStyle(Number(data.numCols),2,data.colRatio)}>
                 <TinaMarkdown content={data.colTwo} />
             </div>
-            <div data-tina-field={tinaField(data, 'colThree')} style={colStyle(Number(data.numCols),3,data.colRatio)}>
+            <div className={"column " + colClass(data.numCols)} data-tina-field={tinaField(data, 'colThree')} style={colStyle(Number(data.numCols),3,data.colRatio)}>
                 <TinaMarkdown content={data.colThree}/>
             </div>
-            <div data-tina-field={tinaField(data, 'colFour')} style={colStyle(Number(data.numCols),4,data.colRatio)}>
+            <div className={"column " + colClass(data.numCols)} data-tina-field={tinaField(data, 'colFour')} style={colStyle(Number(data.numCols),4,data.colRatio)}>
                 <TinaMarkdown content={data.colFour}/>
             </div>
         </section>
@@ -118,6 +133,10 @@ export const flexContentBandSchema: Template = {
     name: 'flexContent',
     label: 'Flexible Content',
     ui:{
+        itemProps: (item) => {
+            // Field values are accessed by item?.<Field name>
+            return { label: item?.title };
+        },
         defaultItem:{
             numCols:'1',
             colRatio:'6',
@@ -171,11 +190,6 @@ export const flexContentBandSchema: Template = {
             },
             options: [
                 {
-                    label:'[---] [---------]',
-                    // number of columns 1st column should take up, out of 12 columns
-                    value:'3',
-                },
-                {
                     label:'[----] [--------]',
                     value:'4'
                 },
@@ -186,10 +200,6 @@ export const flexContentBandSchema: Template = {
                 {
                     label:'[--------] [----]',
                     value:'8',
-                },
-                {
-                    label:'[---------] [---]',
-                    value:'9',
                 },
             ],
         },
