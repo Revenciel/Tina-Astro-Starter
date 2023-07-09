@@ -29,5 +29,10 @@
       "relativePath": "src/content/pages/contact.mdx",
       "anchor": "Contact"
     }
-  ]
+  ],
+  "cta": {
+    "url": "https://www.w3schools.com/cssref/css3_pr_background-size.php",
+    "anchor": "External",
+    "isExternal": true
+  }
 }

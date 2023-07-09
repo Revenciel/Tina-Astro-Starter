@@ -122,7 +122,7 @@ export default defineConfig({
               {
                 type: "string",
                 name: "url",
-                label: "URL",
+                label: "Link URL",
                 ui: {
                   component: externalLink,
                 },
@@ -130,7 +130,32 @@ export default defineConfig({
               {
                 type: "string",
                 name: "anchor",
-                label: "Link text",
+                label: "Display Text",
+              },
+            ],
+          },
+          {
+            type:'object',
+            name:'cta',
+            label:'Call to Action',
+            description:'Optional',
+            fields:[
+              {
+                name:'url',
+                label:'Link URL',
+                type:'string',
+                required:true,
+              },
+              {
+                name:'anchor',
+                label:'Display Text',
+                type:'string',
+                required:true,
+              },
+              {
+                name:'isExternal',
+                label:'Does this link go to an external website (e.g., PayPal?)',
+                type:'boolean',
               },
             ],
           },

@@ -4,14 +4,14 @@
 ### Implemented:
 - Visual editing
 - Block-based editing
+- Responsive header with configurable nav links
+- FlexContent block
 - Click-to-edit
 - Search documents in edit mode
-- Configurable nav links with dynamic form changes for internal and external links
 
 ### To do:
 - nav link bug fix
 - Conditionally render form fields in the flexContent component
-- Make mobile version of navigation
 - Make separate home page collection, distinctive from page collection
 - - This will make it possible to prevent the home page from being deleted, as well as omit page title from the home page
 - implement blog
@@ -23,3 +23,6 @@
 - Ari Gibson, without whom this project would have been over before it got started
 - Tom Bennet, whose Astro + Tina starter was a helpful reference
 - The Astro and Tina teams, who created incredible projects
+
+### Credits:
+Hamburger icon modelled after: https://codepen.io/alvarotrigo/pen/wvrzPWL

@@ -156,6 +156,7 @@ export const flexContentBandSchema: Template = {
             name:'numCols',
             type:'string', // Has to be a string to properly support options
             label:'Number of Columns',
+            description:"At smaller screen sizes, your columns might look like rows instead! This is to make sure your website looks good at all screen sizes.",
             ui: {
                 component: 'button-toggle',
             },
