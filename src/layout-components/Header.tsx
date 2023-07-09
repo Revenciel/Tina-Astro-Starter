@@ -24,7 +24,8 @@ export default function Header({ props }: { props: TinaProps }) {
         <menu>
           {siteData.navLinks.map((link) => {
 
-            var destination = link.relativePath.replace("src/content/pages/", "").replace(".mdx", "");;
+            var deconstructedLink = link.relativePath.split("/");
+            var destination = deconstructedLink[deconstructedLink.length - 1].replace(".mdx", "");
             var target = "";
             if (link.linkType === "external") {
               target = "_blank";
