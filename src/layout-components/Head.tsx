@@ -10,6 +10,7 @@ export default function Head({ props }: { props: TinaProps }) {
     <title>
       {`${data.page.title} | ${siteData.title}`}
     </title>
+    <link rel="icon" href={siteData.favicon}/>
     <link rel="stylesheet" href="/stylesheet.css" />
 
     <meta name="viewport" content="initial-scale=1.0, width=device-width" />

@@ -95,6 +95,7 @@ function bandBg(color: string, img: string, op: string, textCol:string){
 
 export default function FlexContent({ data }: {
     data: {
+        title: string,
         numCols:string,
         colRatio:string,
         colOne: any,
@@ -104,7 +105,7 @@ export default function FlexContent({ data }: {
         background: {
             color: any, //resolve type error
             image: string,
-            opacity:number,
+            opacity:string,
             textColor: any,
         }
     }

@@ -26,6 +26,7 @@ export default function Header({ props }: { props: TinaProps }) {
 
             var deconstructedLink = link.relativePath.split("/");
             var destination = deconstructedLink[deconstructedLink.length - 1].replace(".mdx", "");
+            //console.log(destination);
             var target = "";
             if (link.linkType === "external") {
               target = "_blank";
