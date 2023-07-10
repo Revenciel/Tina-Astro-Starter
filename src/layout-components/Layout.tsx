@@ -1,5 +1,4 @@
-import { useTina, tinaField } from "tinacms/dist/react";
-import siteData from "../content/site-settings/index.json";
+import { useTina } from "tinacms/dist/react";
 import type { TinaProps } from "../types";
 import { Bands } from "../components/bands";
 

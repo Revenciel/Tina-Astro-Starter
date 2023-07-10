@@ -3,13 +3,21 @@ import Layout from "../layout-components/Layout";
 import Head from "../layout-components/Head";
 import Header from "../layout-components/Header";
 import { client } from "../../tina/__generated__/client";
+import siteData from "../content/site-settings/index.json";
 
 const page = await client.queries.page({ relativePath: "index.mdx" });
 ---
 
 <html lang="en">
   <head>
-    <Head props={page}/>
+    <title>
+      {siteData.title}
+    </title>
+    <link rel="icon" href={siteData.favicon} />
+    <link rel="stylesheet" href="/stylesheet.css" />
+
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <meta charset="UTF-8" />
   </head>
   <body>
     <Header props={page} />

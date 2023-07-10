@@ -1,4 +1,4 @@
-import { useTina, tinaField } from "tinacms/dist/react";
+import { useTina } from "tinacms/dist/react";
 import siteData from "../content/site-settings/index.json";
 import type { TinaProps } from "../types";
 
@@ -43,8 +43,3 @@ export default function Header({ props }: { props: TinaProps }) {
     </header>
   );
 }
-
-  // var pageName = item?.path
-  //                   .substring(0,item?.path.lastIndexOf("."))
-  //                   .split("/");
-  //                 pageName = pageName[pageName.length - 1];
