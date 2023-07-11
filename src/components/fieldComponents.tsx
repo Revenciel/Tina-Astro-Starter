@@ -1,6 +1,6 @@
 import { TextField, ReferenceField, ButtonToggle } from "tinacms";
 import React from "react";
-import { MdxFieldPlugin } from "tinacm
+import { MdxFieldPlugin } from "tinacms";
 // ********** REUSABLE FIELD COMPONENTS **********
 
 
@@ -86,3 +86,4 @@ export const flexColumn = (props) => {
   }
   return <MdxFieldPlugin.Component {...props} /> ;
 };
+
