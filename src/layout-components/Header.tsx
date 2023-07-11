@@ -23,16 +23,19 @@ export default function Header({ props }: { props: TinaProps }) {
       <nav>
         <menu>
           {siteData.navLinks.map((link) => {
-
-            var deconstructedLink = link.relativePath.split("/");
-            var destination = deconstructedLink[deconstructedLink.length - 1].replace(".mdx", "");
-            //console.log(destination);
+            var destination;
             var target = "";
+
+            if (link.linkType === "internal"){
+              var deconstructedLink = link.relativePath.split("/");
+              destination = deconstructedLink[deconstructedLink.length - 1].replace(".mdx", "");
+            }
             if (link.linkType === "external") {
               target = "_blank";
               // Where is this error coming from?
               destination = link.url;
             }
+            
             // return appropriate link data
             return (
               <li><a href={destination} target={target}>{link.anchor}</a></li>

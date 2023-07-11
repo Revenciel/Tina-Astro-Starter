@@ -2,7 +2,7 @@ import React from "react";
 import { defineConfig } from "tinacms";
 import { photoBandSchema } from "../src/components/bands/photo";
 import { textBandSchema } from "../src/components/bands/text";
-import { flexContentBandSchema } from "../src/components/bands/flexContent";
+import { flexContentBandSchema } from "../src/components/bands/flexContentSchema";
 import { externalLink, internalLink } from "../src/components/fieldComponents";
 
 // Your hosting provider likely exposes this as an environment variable

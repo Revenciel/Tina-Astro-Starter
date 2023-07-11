@@ -5,6 +5,11 @@
   "tagline": "Website tagline",
   "navLinks": [
     {
+      "linkType": "external",
+      "url": "https://react.dev/reference/react/useMemo",
+      "anchor": "useMemo"
+    },
+    {
       "linkType": "internal",
       "relativePath": "src/content/pages/about.mdx",
       "anchor": "About"
