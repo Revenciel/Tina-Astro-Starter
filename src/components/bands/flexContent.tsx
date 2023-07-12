@@ -1,6 +1,7 @@
 import { tinaField } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import type CSS from 'csstype';
+import { Components } from "../mdx-components";
 
 
 //Conditionally render columns & set column widths.
@@ -113,16 +114,16 @@ export default function FlexContent({ data }: {
         <section className="flexContent grid" style={bandBg(data.background?.color, data.background?.image, data.background?.opacity, data.background?.textColor)}>
             <h2 data-tina-field={tinaField(data.title)}>{data.title}</h2>
             <div className={"column " + colClass(data.numCols)} data-tina-field={tinaField(data, 'colOne')} style={colStyle(Number(data.numCols),1,data.colRatio)}>
-                <TinaMarkdown content={data.colOne}/>
+                <TinaMarkdown content={data.colOne} components={Components}/>
             </div>
             <div className={"column " + colClass(data.numCols)} data-tina-field={tinaField(data, 'colTwo')} style={colStyle(Number(data.numCols),2,data.colRatio)}>
-                <TinaMarkdown content={data.colTwo} />
+                <TinaMarkdown content={data.colTwo} components={Components}/>
             </div>
             <div className={"column " + colClass(data.numCols)} data-tina-field={tinaField(data, 'colThree')} style={colStyle(Number(data.numCols),3,data.colRatio)}>
-                <TinaMarkdown content={data.colThree}/>
+                <TinaMarkdown content={data.colThree} components={Components}/>
             </div>
             <div className={"column " + colClass(data.numCols)} data-tina-field={tinaField(data, 'colFour')} style={colStyle(Number(data.numCols),4,data.colRatio)}>
-                <TinaMarkdown content={data.colFour}/>
+                <TinaMarkdown content={data.colFour} components={Components}/>
             </div>
         </section>
     );

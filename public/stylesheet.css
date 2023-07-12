@@ -1,7 +1,8 @@
 :root {
-  --primary: #ffcc17;
-  --dark: #001d43;
+  --primary: #deabff;
+  --dark: #210038;
   --light: #f4f4f4;
+  --pop: #91dfc1;
 
   --spacer: 20px;
 }
@@ -155,6 +156,38 @@ header input[type="checkbox"]:checked ~ #hamburger .line2 {
 header input[type="checkbox"]:checked ~ #hamburger .line3 {
   transform: rotate(-45deg);
 }
+
+/* ********** MDX COMPONENT: CTA ********** */
+  .CTA {
+    display: block;
+    width: fit-content;
+    padding: var(--spacer);
+    border-radius: 10px;
+    text-decoration: none;
+    cursor:pointer;
+  }
+  .CTA::after {
+    content: " →";
+  }
+
+  .CTA.Primary{
+    background-color: var(--primary);
+    color:var(--dark);
+  }
+  .CTA.Primary:hover{
+    background-color: var(--pop);
+  }
+
+  .CTA.Secondary{
+    background-color: none;
+    color:var(--dark);
+    border:1px solid var(--dark);
+    /* border-color: var(--dark); */
+  }
+  .CTA.Secondary:hover{
+    background-color: var(--dark);
+    color:var(--primary);
+  }
 
 /* ********** BANDS ********** */
 .flexContent img {

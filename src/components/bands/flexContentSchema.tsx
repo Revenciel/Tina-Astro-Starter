@@ -1,6 +1,7 @@
 import React from "react";
 import type { Template } from "tinacms";
 import { columnWidthToggle, flexColumn } from "../fieldComponents";
+import { CtaSchema } from "../mdx-components";
 
 export const flexContentBandSchema: Template = {
     name: 'flexContent',
@@ -82,6 +83,9 @@ export const flexContentBandSchema: Template = {
             name: 'colOne',
             type: 'rich-text',
             label: 'First Column',
+            templates: [
+                CtaSchema,
+              ],
         },
         {
             name: 'colTwo',
@@ -90,6 +94,9 @@ export const flexContentBandSchema: Template = {
             ui:{
                 component:flexColumn,
             },
+            templates: [
+                CtaSchema,
+              ],
         },
         {
             name: 'colThree',
@@ -98,6 +105,9 @@ export const flexContentBandSchema: Template = {
             ui:{
                 component:flexColumn,
             },
+            templates: [
+                CtaSchema,
+              ],
         },
         {
             name: 'colFour',
@@ -106,17 +116,10 @@ export const flexContentBandSchema: Template = {
             ui:{
                 component:flexColumn,
             },
+            templates: [
+                CtaSchema,
+              ],
         },
-        // {
-        //     name:'columnStyles',
-        //     type:'object',
-        //     label:'Column styles',
-        //     fields[
-        //         {
-
-        //         }
-        //     ],
-        // },
         {
             name:'background',
             type:'object',
