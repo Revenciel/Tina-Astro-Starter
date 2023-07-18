@@ -28,17 +28,19 @@ export default function Header({ props }: { props: TinaProps }) {
 
             if (link.linkType === "internal"){
               destination = link.relativePath;
-              //next line is attempted bug fix:
-              if (destination.charAt(destination.length - 1).toString() === '/'){
-                  destination = destination.substring(0,destination.length-2);
-              }
+
               let deconstructedLink = link.relativePath.split("/");
               destination = deconstructedLink[deconstructedLink.length - 1].replace(".mdx", "");
             }
+
             if (link.linkType === "external") {
               target = "_blank";
-              // Where is this error coming from?
-              destination = link.url;
+              // local dev version:
+              //destination = link.url;
+
+              //prod version (to address issue with trailing slashes in Cloudflare)
+              //replace URL with your website's URL
+              destination = "https://tina-astro-starter.pages.dev/" + link.url;
             }
             
             // return appropriate link data
