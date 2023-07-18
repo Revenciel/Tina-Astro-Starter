@@ -1,4 +1,3 @@
-import React from "react";
 import type { Template } from "tinacms";
 import { columnWidthToggle, flexColumn } from "../fieldComponents";
 import { CtaSchema } from "../mdx-components";

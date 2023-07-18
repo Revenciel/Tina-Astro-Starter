@@ -31,6 +31,7 @@ body {
 
 h2 {
   grid-column: 2 / span 8;
+  margin-bottom:0;
 }
 
 /* ********** HEADER ********** */

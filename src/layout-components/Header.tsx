@@ -23,11 +23,16 @@ export default function Header({ props }: { props: TinaProps }) {
       <nav>
         <menu>
           {siteData.navLinks.map((link) => {
-            var destination;
-            var target = "";
+            let destination;
+            let target = "";
 
             if (link.linkType === "internal"){
-              var deconstructedLink = link.relativePath.split("/");
+              destination = link.relativePath;
+              //next line is attempted bug fix:
+              if (destination.charAt(destination.length - 1).toString() === '/'){
+                  destination = destination.substring(0,destination.length-2);
+              }
+              let deconstructedLink = link.relativePath.split("/");
               destination = deconstructedLink[deconstructedLink.length - 1].replace(".mdx", "");
             }
             if (link.linkType === "external") {

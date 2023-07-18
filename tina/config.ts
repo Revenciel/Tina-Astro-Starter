@@ -1,4 +1,3 @@
-import React from "react";
 import { defineConfig } from "tinacms";
 import { photoBandSchema } from "../src/components/bands/photo";
 import { textBandSchema } from "../src/components/bands/text";
