@@ -27,10 +27,8 @@ export default function Header({ props }: { props: TinaProps }) {
             let target = "";
 
             if (link.linkType === "internal"){
-              destination = link.relativePath;
+              destination = link.relativePath.substring(18).replace('.mdx','');
 
-              let deconstructedLink = link.relativePath.split("/");
-              destination = deconstructedLink[deconstructedLink.length - 1].replace(".mdx", "");
               //for prod version (to address issue with trailing slashes in Cloudflare)
               //replace URL with your website's URL
               destination = "https://tina-astro-starter.pages.dev/" + destination;

@@ -168,11 +168,18 @@ export default defineConfig({
         ui: {
           filename: {
             slugify: values => {
+
+              //UNCOMMENT IF ALLOWING USER TO SELECT PARENT PAGE
+              if (values?.parentPage){
+                //18 is character index to remove src/content/pages/
+                return values.parentPage.substring(18).replace('.mdx','') + '/' + `${values?.title?.toLowerCase().replace(/[^a-zA-Z\d_\-\s]/g, '').replace(/\s/g, '-',)}`
+              };
+
               return `${values?.title?.toLowerCase().replace(/[^a-zA-Z\d_\-\s]/g, '').replace(/\s/g, '-',)}`
             },
           },
           router: ({ document }) => {
-            return "/" + document._sys.filename;
+            return "/" + document._sys.relativePath.replace('.mdx','');
           },
         },
         fields: [
@@ -183,6 +190,14 @@ export default defineConfig({
             description: "The title of the page.",
             isTitle: true,
             required: true,
+          },
+          // UNCOMMENT TO ALLOW USER TO SELECT PARENT PAGE
+          {
+            type: "reference",
+            name: "parentPage",
+            label: "Parent Page",
+            collections: ['page'],
+            description:'Optional - if you want this page categorized under another page.',
           },
           {
             type: "object",
