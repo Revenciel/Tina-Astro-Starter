@@ -29,8 +29,12 @@ export default function Header({ props }: { props: TinaProps }) {
             if (link.linkType === "internal"){
               destination = link.relativePath.substring(18).replace('.mdx','');
 
-              //for prod version (to address issue with trailing slashes in Cloudflare)
-              //replace URL with your website's URL
+              //Use absolute links if using Cloudflare to host, to address trailing slashes issue
+
+              //dev version
+              //destination = "http://localhost:3000/" + destination;
+
+              //Prod version - replace URL with your website's URL
               destination = "https://tina-astro-starter.pages.dev/" + destination;
             }
 

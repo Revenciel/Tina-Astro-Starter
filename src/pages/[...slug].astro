@@ -1,6 +1,6 @@
 ---
 import Head from "../layout-components/Head";
-import Header from "../layout-components/Header"
+import Header from "../layout-components/Header";
 import Layout from "../layout-components/Layout";
 import { client } from "../../tina/__generated__/client";
 
@@ -14,19 +14,39 @@ export async function getStaticPaths() {
   }));
 
   // fetch all pages and content from Tina, to pass into useTina hook
-  const tinaPages = await Promise.all(tinaPaths.map(async ({ params }) => await client.queries.page({ relativePath: `${params.relativePath}` })));
+  const tinaPages = await Promise.all(
+    tinaPaths.map(
+      async ({ params }) =>
+        await client.queries.page({ relativePath: `${params.relativePath}` })
+    )
+  );
 
-  function parentPage(page: any){
-    if (page.data.page.parentPage){
-      return page.data.page.parentPage._sys.filename + '/';
+  function ancestor(page:any): any{
+    if (page.parentPage){
+      return (ancestor(page.parentPage) + page._sys.filename + '/');
     }
-    return ""; 
+    return (page._sys.filename + '/');
+  }
+
+  function parentPage(page: any) {
+
+    // If there is a parent page, call recursive ancestor() on the parent
+    if (page.data.page.parentPage) {
+      for (let i = 0; i <= (tinaPages.length - 1); i++ ){
+        //get the parent page and call recursive ancestor() on it
+        if (tinaPages[i].data.page.parentPage?._sys.filename === page.data.page.parentPage._sys.filename){
+          return ancestor(tinaPages[i].data.page.parentPage);
+        }
+      }
+    }
+    
+    //there is no parent page
+    return "";
   }
 
   // reformat data for easier use
-  return (
-  
-  tinaPages.map((page) => ({
+  return tinaPages.map((page) => ({
+
     params: {
       slug: parentPage(page) + page.data.page._sys.filename,
     },
@@ -35,28 +55,19 @@ export async function getStaticPaths() {
       query: page.query,
       variables: page.variables,
     },
-  })));
-
+  }));
 }
-
 ---
 
 <html lang="en">
   <head>
-    <Head props={Astro.props}/>
+    <Head props={Astro.props} />
   </head>
   <body>
     <Header props={Astro.props} />
     <!-- TODO: Investigate and fix type error here -->
-    <Layout client:load props={Astro.props}></Layout>
-  </body>
-</html>
-
-
-
-<!-- Code snippet: rendering a list of pages from an astro component-->
-
-<!-- Update config to include an "include in nav" boolean, then update filter
+    <Layout client:load props={Astro.props} />
+  </body><!-- Code snippet: rendering a list of pages from an astro component--><!-- Update config to include an "include in nav" boolean, then update filter
 
   const pages = (await Astro.glob('./../content/pages/*.{md,mdx}'));
 ---
@@ -67,3 +78,4 @@ export async function getStaticPaths() {
     )
   })}
 </ul> -->
+</html>

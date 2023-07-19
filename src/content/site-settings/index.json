@@ -6,11 +6,6 @@
   "navLinks": [
     {
       "linkType": "internal",
-      "relativePath": "src/content/pages/parent/child.mdx",
-      "anchor": "Child"
-    },
-    {
-      "linkType": "internal",
       "relativePath": "src/content/pages/about.mdx",
       "anchor": "About"
     },
